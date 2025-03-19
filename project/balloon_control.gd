@@ -76,37 +76,49 @@ func populate_balloons(color: String = "Default", originX: int = 0, originY: int
 		newBalloon.scale = Vector2(scale, scale)
 		newBalloon.name = "Balloon" + str(i).pad_zeros(2)
 		newBalloon.set_balloon_color(randColor)
-		Main.balloonArray.append(newBalloon)
+		Main.balloons.append(newBalloon)
 		Main.remainingBalloons.append(newBalloon)
 		add_child(newBalloon)
 		
+		
 		x += 1
+	Main.build_remaining_array()
+
 
 func _check_answers():
 	#Set answer variable based on textbox val or imported csv
-	var ans = Main.answer
+	var ans = 50
 	Main.set_answer(ans)
-	#print("Answer: " + str(ans) + " team1 guess: " + str(Main.get_guess(0)))
 	
+	var currentTeam = Main.currentTeam
 	#For each team, check how wrong they were, then pop those balloons
-	for i in range(1): #range(Main.guesses.size())
-		calc_num_to_pop(i)
-		pop_balloons(i)
+	#for i in range(1): #range(Main.guesses.size())
+	calc_num_to_pop(currentTeam)
+	pop_balloons(currentTeam)
 	
 			
 func calc_num_to_pop(teamNum: int):
-	var percentOff = abs(Main.answer - Main.get_guess(teamNum))
-	#print("Popping " + str(percentOff) + ", team guess: " + str(Main.get_guess(teamNum)))
+	var percentOff = abs(Main.get_answer() - Main.get_guess(teamNum))
+	print("Popping " + str(percentOff) + ", team guess: " + str(Main.get_guess(teamNum)))
 	Main.set_num_to_pop(teamNum, percentOff)	
 	
 func pop_balloons(teamNum: int):
 	for i in range(Main.get_num_to_pop(teamNum)):  #run [numToPop] times
-		if Main.remainingBalloons.size() >= 1:  #If there are any balloons left, make invisible and remove from remainingBalloons
-			var balloon = Main.get_rand_balloon()
+		if Main.remainingArray[teamNum].size() >= 1:  #If there are any balloons left, make invisible and remove from remainingBalloons
+			var balloon = Main.get_rand_balloon(teamNum)
+			balloon.popped[teamNum] = true
 			balloon.visible = false
-			Main.remainingBalloons.erase(balloon)
+			Main.remainingArray[teamNum].erase(balloon)
+	%RemainingBalloonNum.text = str(Main.remainingArray[teamNum].size())
 			
-
+func show_teams_balloons(teamNum: int):
+	var balloons = Main.balloons
+	for balloon in balloons:
+		if balloon.is_popped(teamNum):
+			balloon.visible = false
+		else:
+			balloon.visible = true
+	
 
 
 func _print_guess() -> void:

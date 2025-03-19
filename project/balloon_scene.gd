@@ -1,12 +1,12 @@
 extends Node2D
 
-var currentTeam
+#var currentTeam
 
 func _ready() -> void:
-	currentTeam = 0
+	pass#currentTeam = Main.currentTeam
 
 func _change_team(teamNum: float):
-	currentTeam = int(teamNum)
+	var currentTeam = int(teamNum)
 	var basketColor = "Red"
 	var tintColor
 	#updateBalloons()
@@ -50,6 +50,10 @@ func _change_team(teamNum: float):
 	var grabberFile = load("res://images/ui/grabber/pb_grabber_%s.png" % basketColor.to_lower())
 	%PercentSlider.add_theme_icon_override("grabber", grabberFile)
 	%PercentSlider.add_theme_icon_override("grabber_highlight", grabberFile)
+	
+	%BalloonControl.show_teams_balloons(currentTeam)
+	%RemainingBalloonNum.text = str(Main.remainingArray[currentTeam].size())
+	Main.currentTeam = currentTeam
 	
 	
 	

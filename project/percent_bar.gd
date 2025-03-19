@@ -5,7 +5,7 @@ extends MarginContainer
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _update_percent_guessed(value, teamNum):
+func _update_percent_guessed(value):
 	%PercentGuessed.text = "[right]%s[/right]" % str(int(value))
-	Main.set_guess(teamNum, value)
+	Main.set_guess(value)
 	

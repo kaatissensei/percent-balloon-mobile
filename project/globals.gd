@@ -1,38 +1,48 @@
 extends Node
 
-const colors = ["Blue", "Green", "Orange", "Pink", "Purple", "Red", "Sky_Blue", "Yellow"] #Cyan
+const colors: Array[String] = ["Blue", "Green", "Orange", "Pink", "Purple", "Red", "Sky_Blue", "Yellow"] #Cyan
 var randColor
-var top_bpr = 15 #balloons per row
-var rows = 7
-var num_balloons = 100
-var balloonArray = [] #array of all balloons
-var remainingBalloons = []  #array with unpopped balloons. balloon removed when "popped"
+var top_bpr: int = 15 #balloons per row
+var rows: int = 7
+var num_balloons: int = 100
+var num_teams: int = 6
+var balloons = [] #array of all balloons
+#var balloonsArray = [] #array of above
+var remainingBalloons: Array = []  #array with unpopped balloons. balloon removed when "popped"
+var remainingArray: Array[Array] = [] #array of remainingBalloons[] for each team
 var guesses = [] #[0] = team1, etc.
 var answer
 var numToPop = []
-
+var currentTeam = 0
 var bob_speed: float = 2.5
 var bob_height: float = 5.0
 var bob_width: float = 5.0
-var textureLoc = "res://images/balloons/"
+const textureLoc = "res://images/balloons/"
 var textureName
-var BALLOON = preload("res://balloon.tscn")
+const BALLOON = preload("res://balloon.tscn")
 var scale: float = 0.8
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	guesses = [0,0,0,0,0,0,0,0]
-	numToPop = [0,0,0,0,0,0,0,0]
-	answer = 50
+	guesses.resize(num_teams)
+	guesses.fill(0)
+	numToPop.resize(num_teams)
+	guesses.fill(0)
+	numToPop.resize(num_teams)
+	numToPop.fill(0)
+	
+func build_remaining_array():
+	for i in range(num_teams):
+		remainingArray.append(remainingBalloons.duplicate(true))
 
-func set_guess(i: int, val: int):
-	guesses[i] = val
+func set_guess(val: int):
+	guesses[currentTeam] = val
 	
 func get_guess(i: int):
 	return guesses[i]
 	
-func set_num_to_pop(i: int, val: int):
-	numToPop[i] = val
+func set_num_to_pop(teamNum: int, val: int):
+	numToPop[teamNum] = val
 	
 func get_num_to_pop(i: int):
 	return numToPop[i]
@@ -43,6 +53,12 @@ func set_answer(val: int):
 func get_answer():
 	return answer
 	
-func get_rand_balloon():
-	var balloonNum = randi_range(0,remainingBalloons.size() - 1)
-	return remainingBalloons[balloonNum]
+func get_rand_balloon(teamNum: int):
+	var balloonNum = randi_range(0,remainingArray[teamNum].size() - 1)
+	return remainingArray[teamNum][balloonNum]
+	
+func set_current_team(teamNum: int):
+	currentTeam = teamNum
+
+func get_current_team():
+	return currentTeam

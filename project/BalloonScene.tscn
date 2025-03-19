@@ -225,6 +225,7 @@ flip_v = true
 
 [node name="PercentAnswer" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 10
 clip_contents = false
 custom_minimum_size = Vector2(100, 80)
@@ -233,10 +234,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 125.0
-offset_top = -158.0
-offset_right = 274.0
-offset_bottom = -69.9999
+offset_left = 185.0
+offset_top = -249.0
+offset_right = 334.0
+offset_bottom = -161.0
 grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1.3, 1.3)
@@ -246,7 +247,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[right]85[/right]
+text = "[right]50[/right]
 "
 scroll_active = false
 
@@ -286,7 +287,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[right]85[/right]
+text = "[right]0[/right]
 "
 scroll_active = false
 
@@ -497,6 +498,39 @@ text = "[center]76%[/center]"
 fit_content = true
 vertical_alignment = 1
 
-[connection signal="value_changed" from="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/PercentBarMargin" method="_update_percent_guessed" binds= [0]]
+[node name="QuestionPanel" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1500, 100)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -750.0
+offset_top = 10.0
+offset_right = 750.0
+offset_bottom = 155.0
+grow_horizontal = 2
+
+[node name="QuestionText" type="RichTextLabel" parent="CanvasLayer/QuestionPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Q1: What percent of students went to an amusement park?"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemainingBalloonNum" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 203.0
+offset_bottom = 148.0
+theme_override_font_sizes/normal_font_size = 100
+text = "100"
+
+[connection signal="value_changed" from="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/PercentBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/CheckAnswers" to="CanvasLayer/BalloonControl" method="_check_answers"]
 [connection signal="value_changed" from="CanvasLayer/TeamSlider" to="." method="_change_team"]
