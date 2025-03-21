@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5juwfw3grufw"]
+[gd_scene load_steps=26 format=3 uid="uid://b5juwfw3grufw"]
 
 [ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
 [ext_resource type="Texture2D" uid="uid://b0ith50w83jxu" path="res://images/assets/basketRed.png" id="2_qe80r"]
@@ -55,6 +55,11 @@ texture = ExtResource("10_eknsk")
 texture_margin_top = 50.0
 texture_margin_bottom = 25.0
 axis_stretch_vertical = 2
+
+[sub_resource type="Theme" id="Theme_fxbyx"]
+default_font_size = 80
+LineEdit/constants/minimum_character_width = 0
+LineEdit/constants/outline_size = 5
 
 [node name="BalloonScene" type="Node2D"]
 script = ExtResource("1_qfsef")
@@ -500,6 +505,7 @@ vertical_alignment = 1
 
 [node name="QuestionPanel" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(1500, 100)
 anchors_preset = 5
 anchor_left = 0.5
@@ -530,6 +536,27 @@ offset_right = 203.0
 offset_bottom = 148.0
 theme_override_font_sizes/normal_font_size = 100
 text = "100"
+
+[node name="AnswerBox" type="SpinBox" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1675.0
+offset_top = 716.0
+offset_right = 1961.0
+offset_bottom = 900.0
+theme = SubResource("Theme_fxbyx")
+theme_override_constants/field_and_buttons_separation = 50
+rounded = true
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/AnswerBox"]
+layout_mode = 0
+offset_top = -67.0
+offset_right = 230.0
+offset_bottom = 4.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Answer"
+scroll_active = false
 
 [connection signal="value_changed" from="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/PercentBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/CheckAnswers" to="CanvasLayer/BalloonControl" method="_check_answers"]

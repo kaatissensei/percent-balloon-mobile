@@ -87,7 +87,7 @@ func populate_balloons(color: String = "Default", originX: int = 0, originY: int
 
 func _check_answers():
 	#Set answer variable based on textbox val or imported csv
-	var ans = 50
+	var ans = int(%AnswerBox.value)
 	Main.set_answer(ans)
 	
 	var currentTeam = Main.currentTeam
