@@ -45,7 +45,12 @@ func _on_file_loaded(file_name: String, type: String, base64_data: String) -> vo
 		file.store_string(utf8_data)
 		file.close() #Don't forget this!
 		Main.csvFile = FileAccess.open("user://PB_Questions.csv", FileAccess.READ)
-		
+		Main.csvFile = "Question,Answer
+		This is question 1,10
+		What about question 2?,20
+		What percent blah blah blah,33
+		"
 		Main.parse_csv()
+		load_question_menu()
 	else:
 		pass#%DebugText.text = "Can't find file."

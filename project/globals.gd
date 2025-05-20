@@ -81,8 +81,9 @@ func parse_csv():
 		csvArray.push_back(csvLine)
 	csvArray.pop_front() #removes title
 	
-	print(csvArray)
-	#for i in range(numQuestions):
+	for i in range(numQuestions):
+		questions[i] = csvArray[int(2 * i)]
+		answers[i] = csvArray[int(2 * i) + 1]
 		
 
 func parse_csv_string():
