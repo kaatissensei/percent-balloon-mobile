@@ -51,9 +51,9 @@ func _change_team(teamNum: float):
 	%PercentSlider.add_theme_icon_override("grabber", grabberFile)
 	%PercentSlider.add_theme_icon_override("grabber_highlight", grabberFile)
 	%PercentSlider.value = 0
+	%PercentSlider.value = 0
 	%BalloonControl.show_teams_balloons(currentTeam)
+	%RemainingBalloon.texture = load("res://images/balloons/balloon%sSm.png" % basketColor)
 	%RemainingBalloonNum.text = str(Main.remainingArray[currentTeam].size())
 	Main.currentTeam = currentTeam
-	
-	
 	

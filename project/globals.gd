@@ -22,8 +22,18 @@ var textureName
 const BALLOON = preload("res://balloon.tscn")
 var scale: float = 0.8
 
+var numQuestions : int = 10
+var questions : Array[String] = []
+var answers : Array[int] = []
+
+var csvFile
+var csvArray
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	questions.resize(numQuestions)
+	answers.resize(numQuestions)
+	
 	guesses.resize(num_teams)
 	guesses.fill(0)
 	numToPop.resize(num_teams)
@@ -62,3 +72,25 @@ func set_current_team(teamNum: int):
 
 func get_current_team():
 	return currentTeam
+
+func parse_csv():
+	questions = []
+	#while not csvFile.eof_reached():
+	while csvFile.get_position() < csvFile.get_length():
+		var csvLine = csvFile.get_csv_line()
+		csvArray.push_back(csvLine)
+	csvArray.pop_front() #removes title
+	
+	print(csvArray)
+	#for i in range(numQuestions):
+		
+
+func parse_csv_string():
+	questions = csvFile.split(",")
+	questions.pop_front()
+	
+func fullscreen():
+	var mode := DisplayServer.window_get_mode()
+	var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
+	
