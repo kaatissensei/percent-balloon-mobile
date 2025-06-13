@@ -1,0 +1,928 @@
+[gd_scene load_steps=28 format=3 uid="uid://b5juwfw3grufw"]
+
+[ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
+[ext_resource type="Texture2D" uid="uid://b0ith50w83jxu" path="res://images/assets/basketRed.png" id="2_qe80r"]
+[ext_resource type="Texture2D" uid="uid://m4vqseva2po" path="res://images/ui/grabber/pb_grabber_red.png" id="5_syt7c"]
+[ext_resource type="PackedScene" uid="uid://bvej8mbofl8ot" path="res://balloonSpawner.tscn" id="6_m8k1a"]
+[ext_resource type="Texture2D" uid="uid://kim70wabdn0m" path="res://images/ui/grabber/pb_grabber_blue.png" id="7_fxbyx"]
+[ext_resource type="Texture2D" uid="uid://kq3tpnjh5vaa" path="res://images/assets/pbTeam.png" id="7_ilxei"]
+[ext_resource type="Texture2D" uid="uid://dtv23issybgvp" path="res://images/assets/teamTies.png" id="8_e4gr6"]
+[ext_resource type="Texture2D" uid="uid://udvxtsatsoqs" path="res://images/ui/grabber/pb_grabber_yellow.png" id="8_lysoq"]
+[ext_resource type="Script" uid="uid://bptc4mu6y1n2g" path="res://percent_bar.gd" id="8_prrwr"]
+[ext_resource type="Texture2D" uid="uid://dnhciy8yeghlv" path="res://images/ui/grabber/pb_grabber_green.png" id="9_6aymu"]
+[ext_resource type="Texture2D" uid="uid://bk1b8lj8c3ejx" path="res://images/balloons/balloonRedSm.png" id="9_jv7cd"]
+[ext_resource type="Texture2D" uid="uid://cwedofgcsj44l" path="res://images/ui/PercentBalloonBar.png" id="10_eknsk"]
+[ext_resource type="Texture2D" uid="uid://ojjwgl2fwj7t" path="res://images/ui/grabber/pb_grabber_orange.png" id="10_r7h5b"]
+[ext_resource type="Texture2D" uid="uid://b612hgdknw4n" path="res://images/ui/grabber/pb_grabber_purple.png" id="11_uvk66"]
+[ext_resource type="Theme" uid="uid://wflemmk886og" path="res://menu_theme.tres" id="15_lysoq"]
+[ext_resource type="Script" uid="uid://ctjy2ne4gbmtu" path="res://menu.gd" id="16_6aymu"]
+
+[sub_resource type="Gradient" id="Gradient_ugsjf"]
+colors = PackedColorArray(0, 0.721569, 1, 1, 0, 0.607843, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_68c05"]
+gradient = SubResource("Gradient_ugsjf")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_xpfbk"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ivh13"]
+gradient = SubResource("Gradient_xpfbk")
+width = 500
+
+[sub_resource type="Gradient" id="Gradient_vligg"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_125al"]
+gradient = SubResource("Gradient_vligg")
+width = 1
+height = 80
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ool1t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dnyt"]
+
+[sub_resource type="Theme" id="Theme_46dds"]
+HSlider/constants/grabber_offset = -5
+HSlider/icons/grabber = ExtResource("5_syt7c")
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource("5_syt7c")
+HSlider/icons/tick = SubResource("GradientTexture2D_125al")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_ool1t")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_3dnyt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_27v4i"]
+texture = ExtResource("10_eknsk")
+texture_margin_top = 50.0
+texture_margin_bottom = 25.0
+axis_stretch_vertical = 2
+
+[sub_resource type="Theme" id="Theme_fxbyx"]
+default_font_size = 80
+LineEdit/constants/minimum_character_width = 0
+LineEdit/constants/outline_size = 5
+
+[node name="BalloonScene" type="Node2D"]
+script = ExtResource("1_qfsef")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="BalloonControl" parent="CanvasLayer" instance=ExtResource("6_m8k1a")]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+z_index = -5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_68c05")
+
+[node name="BasketContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Basket" type="TextureRect" parent="CanvasLayer/BasketContainer"]
+unique_name_in_owner = true
+z_index = 5
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = ExtResource("2_qe80r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+columns = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+ratio = 1.7778
+
+[node name="BalloonControl1" parent="CanvasLayer/GridContainer/AspectRatioContainer" instance=ExtResource("6_m8k1a")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = null
+
+[node name="PercentBarMargin" type="MarginContainer" parent="CanvasLayer"]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 930
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+script = ExtResource("8_prrwr")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PercentBarMargin"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_ivh13")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PercentBarMargin/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PercentSlider" type="HSlider" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer"]
+unique_name_in_owner = true
+z_index = 5
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 1
+theme = SubResource("Theme_46dds")
+theme_override_styles/slider = SubResource("StyleBoxTexture_27v4i")
+rounded = true
+tick_count = 100
+
+[node name="RedGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("5_syt7c")
+flip_v = true
+
+[node name="BlueGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("7_fxbyx")
+flip_v = true
+
+[node name="YellowGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("8_lysoq")
+flip_v = true
+
+[node name="GreenGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("9_6aymu")
+flip_v = true
+
+[node name="OrangeGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("10_r7h5b")
+flip_v = true
+
+[node name="PurpleGuess" type="TextureRect" parent="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 103.0
+texture = ExtResource("11_uvk66")
+flip_v = true
+
+[node name="PercentAnswer" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+clip_contents = false
+custom_minimum_size = Vector2(100, 80)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 185.0
+offset_top = -249.0
+offset_right = 334.0
+offset_bottom = -161.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.3, 1.3)
+pivot_offset = Vector2(1937.69, -5.38483)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[right]50[/right]
+"
+scroll_active = false
+
+[node name="PercentSymbolAnswer" type="RichTextLabel" parent="CanvasLayer/PercentAnswer"]
+layout_mode = 0
+offset_left = 144.615
+offset_top = 23.8461
+offset_right = 190.615
+offset_bottom = 82.8461
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[center]%[/center]"
+scroll_active = false
+
+[node name="PercentGuessed" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 10
+clip_contents = false
+custom_minimum_size = Vector2(100, 80)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1979.0
+offset_top = -158.0
+offset_right = -1830.0
+offset_bottom = -69.9998
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.3, 1.3)
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[right]0[/right]
+"
+scroll_active = false
+
+[node name="PercentGuessedSymbol" type="RichTextLabel" parent="CanvasLayer/PercentGuessed"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 144.615
+offset_top = 23.8461
+offset_right = 190.615
+offset_bottom = 82.8461
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[center]%[/center]"
+scroll_active = false
+
+[node name="CheckAnswers" type="Button" parent="CanvasLayer"]
+offset_left = 1744.0
+offset_top = 944.0
+offset_right = 1912.0
+offset_bottom = 1020.0
+text = "Check"
+
+[node name="TeamSlider" type="VSlider" parent="CanvasLayer"]
+offset_left = 79.0
+offset_top = 351.0
+offset_right = 171.0
+offset_bottom = 789.0
+max_value = 5.0
+rounded = true
+tick_count = 6
+
+[node name="Students" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(957, 809)
+texture = ExtResource("7_ilxei")
+
+[node name="Ties" type="Sprite2D" parent="CanvasLayer/Students"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("8_e4gr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+visible = false
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 100
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Team1" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team1"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Team2" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team2"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Team3" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team3"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Team4" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team4"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Team5" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team5"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Team6" type="TextureRect" parent="CanvasLayer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer/GridContainer/Team6"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[center]76%[/center]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="QuestionPanel" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1500, 100)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -750.0
+offset_top = 10.0
+offset_right = 750.0
+offset_bottom = 155.0
+grow_horizontal = 2
+
+[node name="QuestionText" type="RichTextLabel" parent="CanvasLayer/QuestionPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+text = "Q1: What percent of students went to an amusement park?"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RemainingBalloon" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -209.0
+offset_bottom = 203.0
+grow_horizontal = 0
+texture = ExtResource("9_jv7cd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RemainingBalloonNum" type="RichTextLabel" parent="CanvasLayer/RemainingBalloon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -88.5
+offset_right = 101.5
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 100
+text = "100"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="BalloonOriginalTotal" type="RichTextLabel" parent="CanvasLayer/RemainingBalloon/RemainingBalloonNum"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 42
+text = "/100"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="AnswerBox" type="SpinBox" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1675.0
+offset_top = 716.0
+offset_right = 1961.0
+offset_bottom = 900.0
+theme = SubResource("Theme_fxbyx")
+theme_override_constants/field_and_buttons_separation = 50
+rounded = true
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/AnswerBox"]
+layout_mode = 0
+offset_top = -67.0
+offset_right = 230.0
+offset_bottom = 4.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Answer"
+scroll_active = false
+
+[node name="QuestionMenu" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -762.0
+offset_top = -524.0
+offset_right = 762.0
+offset_bottom = 523.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_lysoq")
+script = ExtResource("16_6aymu")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/QuestionMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 100
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/QuestionMenu/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("15_lysoq")
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Questions" type="VBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(1250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Q1" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q1"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 1"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q1"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q2" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 2"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q2"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q3" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q3"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 3"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q3"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q4" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q4"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 4"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q4"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q5" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q5"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 5"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q5"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q6" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q6"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 6"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q6"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q7" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q7"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 7"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q7"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q8" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q8"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 8"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q8"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q9" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q9"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 9"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q9"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="Q10" type="HBoxContainer" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Question" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q10"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "Question 10"
+
+[node name="Percentage" type="LineEdit" parent="CanvasLayer/QuestionMenu/MarginContainer/ScrollContainer/Questions/Q10"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme = ExtResource("15_lysoq")
+placeholder_text = "%"
+alignment = 1
+
+[node name="ConfirmQuestions" type="Button" parent="CanvasLayer/QuestionMenu"]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -92.0
+offset_right = 203.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("15_lysoq")
+text = "OK"
+
+[node name="CancelQuestions" type="Button" parent="CanvasLayer/QuestionMenu"]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -317.0
+offset_top = -92.0
+offset_right = -67.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("15_lysoq")
+text = "Cancel"
+
+[node name="UploadQuestions" type="Button" parent="CanvasLayer/QuestionMenu"]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -744.0
+offset_top = -95.0
+offset_right = -494.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("15_lysoq")
+theme_override_font_sizes/font_size = 40
+text = "Upload .csv"
+
+[node name="OpenQuestionMenu" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(200, 75)
+offset_left = 1512.0
+offset_top = 7.0
+offset_right = 1712.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 32
+text = "Questions"
+
+[node name="DEBUG" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 475.0
+offset_bottom = 568.0
+theme_override_font_sizes/normal_font_size = 0
+
+[connection signal="value_changed" from="CanvasLayer/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/PercentBarMargin" method="_update_percent_guessed"]
+[connection signal="pressed" from="CanvasLayer/CheckAnswers" to="CanvasLayer/BalloonControl" method="_check_answers"]
+[connection signal="value_changed" from="CanvasLayer/TeamSlider" to="." method="_change_team"]
+[connection signal="pressed" from="CanvasLayer/QuestionMenu/ConfirmQuestions" to="CanvasLayer/QuestionMenu" method="_set_questions"]
+[connection signal="pressed" from="CanvasLayer/QuestionMenu/CancelQuestions" to="CanvasLayer/QuestionMenu" method="_close_menu"]
+[connection signal="pressed" from="CanvasLayer/QuestionMenu/UploadQuestions" to="CanvasLayer/QuestionMenu" method="_on_upload_pressed"]
+[connection signal="pressed" from="CanvasLayer/OpenQuestionMenu" to="CanvasLayer/QuestionMenu" method="_open_menu"]

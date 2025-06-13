@@ -1,0 +1,80 @@
+extends Control
+
+@onready var upload_button: Button = %"UploadQuestions" as Button
+
+func _ready() -> void:
+	## file_access_web functions won't work if you don't connect them!
+	upload_button.pressed.connect(_on_upload_pressed)
+	#file_access_web.load_started.connect(_on_file_load_started)
+	file_access_web.loaded.connect(_on_file_loaded)
+	file_access_web.progress.connect(_on_progress)
+	file_access_web.error.connect(_on_error)
+
+func _set_questions():
+	#Main.clear_questions()
+	for i in range(Main.num_questions):
+		Main.questions[i] = %Questions.get_child(i).get_child(0).text
+		Main.answers[i] = int(%Questions.get_child(i).get_child(1).text)
+	%QuestionText.text = "Q1: " + Main.questions[0]
+	Main.question_num = 1
+	_close_menu()
+
+func load_question_menu():
+	for i in range(Main.questions.size()):
+		%Questions.get_child(i).get_child(0).text = Main.questions[i]
+		if Main.answers[i] != 0:
+			%Questions.get_child(i).get_child(1).text = str(Main.answers[i])
+
+func _open_menu():
+	load_question_menu()
+	visible = true
+
+func _close_menu():
+	visible = false
+
+#WEB FILE ACCESS FUNCTIONS ------------------------------------------------\
+
+var file_access_web: FileAccessWeb = FileAccessWeb.new()
+
+#func _on_file_load_started(file_name: String) -> void:
+	#progress.visible = true
+	#success_label.visible = false
+
+func _on_error() -> void:
+	push_error("Error!")
+
+func _on_upload_pressed() -> void:
+	if OS.has_feature("web"):
+		file_access_web.open(".csv")
+	else:
+		pass
+		#var path = "res://"
+		#var filename = "PercentBalloonTest.csv"
+		#var file := FileAccess.open(path.path_join(filename), FileAccess.READ)
+		#if file == null:
+			#var error_str: String = error_string(FileAccess.get_open_error())
+			#push_warning("Couldn't open file because: %s" % error_str)
+		#print(file)
+		#Main.csvFile = file
+		#Main.parse_csv()
+		#load_question_menu()
+		#%DEBUG.text = Main.csvArray
+
+func _on_progress(current_bytes: int, total_bytes: int) -> void:
+	pass
+	#var percentage: float = float(current_bytes) / float(total_bytes) * 100
+	#progress.value = percentage
+
+func _on_file_loaded(file_name: String, type: String, base64_data: String) -> void:
+	var utf8_data: String = Marshalls.base64_to_utf8(base64_data)
+	#var string_data: String = base64_data.get_string_from_utf8()
+	var file = FileAccess.open("user://PB_Questions.csv", FileAccess.WRITE)
+	if FileAccess.file_exists("user://PB_Questions.csv"):
+		file.store_string(utf8_data)
+		file.close() #Don't forget this!
+		Main.csvFile = FileAccess.open("user://PB_Questions.csv", FileAccess.READ)
+		Main.parse_csv()
+		load_question_menu()
+		%DEBUG.text = Main.csvArray
+	else:
+		%DEBUG.text = "Can't find file."
