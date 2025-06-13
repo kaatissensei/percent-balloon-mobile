@@ -1,9 +1,0 @@
-[gd_resource type="MultiMesh" load_steps=2 format=3 uid="uid://d2dh4k51qjojb"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_42475"]
-size = Vector2(-100, 100)
-
-[resource]
-use_colors = true
-use_custom_data = true
-mesh = SubResource("QuadMesh_42475")

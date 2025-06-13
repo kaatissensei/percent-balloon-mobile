@@ -1,8 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c4dc2ochoe445"]
-
-[ext_resource type="FontFile" uid="uid://xtjjljjt1axs" path="res://images/assets/Jua-Regular.ttf" id="1_g40v4"]
-
-[resource]
-RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
-RichTextLabel/constants/outline_size = 30
-RichTextLabel/fonts/normal_font = ExtResource("1_g40v4")

@@ -1,5 +1,0 @@
-[gd_resource type="GradientTexture2D" format=3 uid="uid://da7lruv0m047i"]
-
-[resource]
-gradient = null
-fill_to = Vector2(0, 1)
