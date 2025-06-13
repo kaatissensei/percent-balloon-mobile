@@ -10,6 +10,7 @@ var balloons = [] #array of all balloons
 #var balloonsArray = [] #array of above
 var remainingBalloons: Array = []  #array with unpopped balloons. balloon removed when "popped"
 var remainingArray: Array[Array] = [] #array of remainingBalloons[] for each team
+var result_balloons : Array[Array] = []
 var guesses = [] #[0] = team1, etc.
 var answer
 var numToPop = []
@@ -20,19 +21,21 @@ var bob_width: float = 5.0
 const textureLoc = "res://images/balloons/"
 var textureName
 const BALLOON = preload("res://balloon.tscn")
+const BALLOON_LOCAL = preload("res://balloon_local.tscn")
 var scale: float = 0.8
 
-var numQuestions : int = 10
+var num_questions : int = 10
 var questions : Array[String] = []
 var answers : Array[int] = []
+var question_num : int = 1   #Current question number
 
 var csvFile
-var csvArray
+var csvArray = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	questions.resize(numQuestions)
-	answers.resize(numQuestions)
+	questions.resize(num_questions)
+	answers.resize(num_questions)
 	
 	guesses.resize(num_teams)
 	guesses.fill(0)
@@ -41,6 +44,8 @@ func _ready() -> void:
 	numToPop.resize(num_teams)
 	numToPop.fill(0)
 	
+	result_balloons.resize(num_teams)
+	
 func build_remaining_array():
 	for i in range(num_teams):
 		remainingArray.append(remainingBalloons.duplicate(true))
@@ -48,8 +53,8 @@ func build_remaining_array():
 func set_guess(val: int):
 	guesses[currentTeam] = val
 	
-func get_guess(i: int):
-	return guesses[i]
+func get_guess(team_num: int):
+	return guesses[team_num]
 	
 func set_num_to_pop(teamNum: int, val: int):
 	numToPop[teamNum] = val
@@ -62,29 +67,41 @@ func set_answer(val: int):
 	
 func get_answer():
 	return answer
-	
+
 func get_rand_balloon(teamNum: int):
 	var balloonNum = randi_range(0,remainingArray[teamNum].size() - 1)
 	return remainingArray[teamNum][balloonNum]
-	
+
+func get_rand_balloons(teamNum: int):
+	var balloonNum = randi_range(0,remainingArray[teamNum].size() - 1)
+	return [remainingArray[teamNum][balloonNum], result_balloons[teamNum][balloonNum]]
+
 func set_current_team(teamNum: int):
 	currentTeam = teamNum
 
 func get_current_team():
 	return currentTeam
 
+func clear_questions():
+	questions.clear()
+	answers.clear()
+	questions.resize(num_questions)
+	answers.resize(num_questions)
+
 func parse_csv():
-	questions = []
-	#while not csvFile.eof_reached():
+	var csv_line_len = 2 #number of elements per csv line
+	
 	while csvFile.get_position() < csvFile.get_length():
 		var csvLine = csvFile.get_csv_line()
 		csvArray.push_back(csvLine)
 	csvArray.pop_front() #removes title
-	
-	for i in range(numQuestions):
-		questions[i] = csvArray[int(2 * i)]
-		answers[i] = csvArray[int(2 * i) + 1]
-		
+
+	for i in range(csvArray.size()):
+		var arr = csvArray.slice(i,i+csv_line_len)[0]
+		#Assign variables here
+		questions[i] = arr[0]
+		answers[i] = int(arr[1])
+
 
 func parse_csv_string():
 	questions = csvFile.split(",")

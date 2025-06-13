@@ -63,7 +63,7 @@ func populate_balloons(color: String = "Default", originX: int = 0, originY: int
 		#Create new balloon instance
 		var newBalloon = Main.BALLOON.instantiate()
 		var rnd = randi_range(-10,10)
-		newBalloon.transform = Transform2D(deg_to_rad(rnd / 2), Vector2((xOffset+(balloon_size * x) + rnd)*ratio, 280+y * 70 + rnd - yParabola*2))*ratio #2d(instance int, transform2d(rot, trans)
+		newBalloon.transform = Transform2D(deg_to_rad(float(rnd) / 2), Vector2((xOffset+(balloon_size * x) + rnd)*ratio, 280+y * 70 + rnd - yParabola*2))*ratio #2d(instance int, transform2d(rot, trans)
 		newBalloon.position += Vector2(balloonControlX, balloonControlY)
 		
 		#Set balloon color
@@ -87,29 +87,37 @@ func populate_balloons(color: String = "Default", originX: int = 0, originY: int
 
 func _check_answers():
 	#Set answer variable based on textbox val or imported csv
-	var ans = int(%AnswerBox.value)
+	var ans = Main.answers[Main.question_num - 1]
 	Main.set_answer(ans)
 	
-	var currentTeam = Main.currentTeam
 	#For each team, check how wrong they were, then pop those balloons
-	#for i in range(1): #range(Main.guesses.size())
-	calc_num_to_pop(currentTeam)
-	pop_balloons(currentTeam)
+	for i in range(Main.num_teams):
+		calc_num_to_pop(i)
+		pop_balloons(i)
 	
 			
 func calc_num_to_pop(teamNum: int):
 	var percentOff = abs(Main.get_answer() - Main.get_guess(teamNum))
-	print("Popping " + str(percentOff) + ", team guess: " + str(Main.get_guess(teamNum)))
+	#print("Popping " + str(percentOff) + ", team guess: " + str(Main.get_guess(teamNum)))
 	Main.set_num_to_pop(teamNum, percentOff)	
 	
 func pop_balloons(teamNum: int):
-	for i in range(Main.get_num_to_pop(teamNum)):  #run [numToPop] times
+	var num_to_pop = Main.get_num_to_pop(teamNum)
+	for i in range(num_to_pop):  #run [numToPop] times
 		if Main.remainingArray[teamNum].size() >= 1:  #If there are any balloons left, make invisible and remove from remainingBalloons
-			var balloon = Main.get_rand_balloon(teamNum)
-			balloon.popped[teamNum] = true
-			balloon.visible = false
-			Main.remainingArray[teamNum].erase(balloon)
-	%RemainingBalloonNum.text = str(Main.remainingArray[teamNum].size())
+			var balloon = Main.get_rand_balloons(teamNum)
+			balloon[0].popped[teamNum] = true
+			if teamNum == Main.currentTeam:
+				balloon[0].visible = false
+			Main.remainingArray[teamNum].erase(balloon[0])
+			#Result balloon
+			balloon[1].visible = false
+			Main.result_balloons[teamNum].erase(balloon[1])
+	%RemainingBalloonNum.text = str(Main.remainingArray[Main.currentTeam].size())
+	#Update NumPopped text boxes
+	var popped_text = %BalloonResults.get_child(teamNum).get_child(1)
+	popped_text.visible = true
+	popped_text.text = "-%d" % num_to_pop
 			
 func show_teams_balloons(teamNum: int):
 	var balloons = Main.balloons
@@ -119,7 +127,6 @@ func show_teams_balloons(teamNum: int):
 		else:
 			balloon.visible = true
 	
-
 
 func _print_guess() -> void:
 	print(str(Main.get_guess(0)))

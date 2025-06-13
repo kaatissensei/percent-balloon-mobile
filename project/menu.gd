@@ -1,10 +1,22 @@
 extends Control
 
+@onready var upload_button: Button = %"UploadQuestions" as Button
+
+func _ready() -> void:
+	## file_access_web functions won't work if you don't connect them!
+	upload_button.pressed.connect(_on_upload_pressed)
+	#file_access_web.load_started.connect(_on_file_load_started)
+	file_access_web.loaded.connect(_on_file_loaded)
+	file_access_web.progress.connect(_on_progress)
+	file_access_web.error.connect(_on_error)
 
 func _set_questions():
-	for i in range(Main.numQuestions):
+	#Main.clear_questions()
+	for i in range(Main.num_questions):
 		Main.questions[i] = %Questions.get_child(i).get_child(0).text
 		Main.answers[i] = int(%Questions.get_child(i).get_child(1).text)
+	%QuestionText.text = "Q1: " + Main.questions[0]
+	Main.question_num = 1
 	_close_menu()
 
 func load_question_menu():
@@ -28,8 +40,25 @@ var file_access_web: FileAccessWeb = FileAccessWeb.new()
 	#progress.visible = true
 	#success_label.visible = false
 
+func _on_error() -> void:
+	push_error("Error!")
+
 func _on_upload_pressed() -> void:
-	file_access_web.open(".csv")
+	if OS.has_feature("web"):
+		file_access_web.open(".csv")
+	else:
+		pass
+		#var path = "res://"
+		#var filename = "PercentBalloonTest.csv"
+		#var file := FileAccess.open(path.path_join(filename), FileAccess.READ)
+		#if file == null:
+			#var error_str: String = error_string(FileAccess.get_open_error())
+			#push_warning("Couldn't open file because: %s" % error_str)
+		#print(file)
+		#Main.csvFile = file
+		#Main.parse_csv()
+		#load_question_menu()
+		#%DEBUG.text = Main.csvArray
 
 func _on_progress(current_bytes: int, total_bytes: int) -> void:
 	pass
@@ -37,7 +66,6 @@ func _on_progress(current_bytes: int, total_bytes: int) -> void:
 	#progress.value = percentage
 
 func _on_file_loaded(file_name: String, type: String, base64_data: String) -> void:
-
 	var utf8_data: String = Marshalls.base64_to_utf8(base64_data)
 	#var string_data: String = base64_data.get_string_from_utf8()
 	var file = FileAccess.open("user://PB_Questions.csv", FileAccess.WRITE)
@@ -45,12 +73,8 @@ func _on_file_loaded(file_name: String, type: String, base64_data: String) -> vo
 		file.store_string(utf8_data)
 		file.close() #Don't forget this!
 		Main.csvFile = FileAccess.open("user://PB_Questions.csv", FileAccess.READ)
-		Main.csvFile = "Question,Answer
-		This is question 1,10
-		What about question 2?,20
-		What percent blah blah blah,33
-		"
 		Main.parse_csv()
 		load_question_menu()
+		%DEBUG.text = Main.csvArray
 	else:
-		pass#%DebugText.text = "Can't find file."
+		%DEBUG.text = "Can't find file."

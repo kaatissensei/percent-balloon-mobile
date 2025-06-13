@@ -1,9 +1,7 @@
-[gd_scene load_steps=56 format=3 uid="uid://b5juwfw3grufw"]
+[gd_scene load_steps=44 format=3 uid="uid://b5juwfw3grufw"]
 
 [ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
-[ext_resource type="Texture2D" uid="uid://c8off70hx3i4u" path="res://sky.tres" id="2_gel8g"]
 [ext_resource type="Texture2D" uid="uid://b0ith50w83jxu" path="res://images/assets/basketRed.png" id="2_qe80r"]
-[ext_resource type="Texture2D" uid="uid://dhtk4rf8fwjqy" path="res://images/assets/Clouds.png" id="3_4lacu"]
 [ext_resource type="Texture2D" uid="uid://m4vqseva2po" path="res://images/ui/grabber/pb_grabber_red.png" id="5_syt7c"]
 [ext_resource type="PackedScene" uid="uid://bvej8mbofl8ot" path="res://balloonSpawner.tscn" id="6_m8k1a"]
 [ext_resource type="Texture2D" uid="uid://dxmna2v3rsf7u" path="res://images/ui/triangles/pb_triangle_red.png" id="7_8m730"]
@@ -31,12 +29,14 @@
 [ext_resource type="Texture2D" uid="uid://5gbkw7mviusj" path="res://images/balloons/balloonPurpleSm.png" id="17_f0rqy"]
 [ext_resource type="Texture2D" uid="uid://snwkmd4otban" path="res://images/balloons/balloonOrangeSm.png" id="18_br3mg"]
 [ext_resource type="Theme" uid="uid://c4dc2ochoe445" path="res://results_theme.tres" id="21_br3mg"]
-[ext_resource type="Texture2D" uid="uid://dtt0gk18lxkhj" path="res://images/ui/rope 9patch.png" id="22_i1pch"]
 [ext_resource type="Script" uid="uid://cbhewqrc6wgjr" path="res://results_screen.gd" id="23_cqpuy"]
-[ext_resource type="PackedScene" uid="uid://bg7a5mpvpfjjr" path="res://balloon_circle.tscn" id="27_ax8sm"]
-[ext_resource type="Script" uid="uid://c1slb0btx6k7d" path="res://main_menu.gd" id="34_sdcfj"]
-[ext_resource type="Texture2D" uid="uid://b4xnd2jqtlpaa" path="res://images/ui/PercentBalloonTitle_en.png" id="35_sdcfj"]
-[ext_resource type="Texture2D" uid="uid://dc1akr8dv0tpb" path="res://images/ui/PercentBalloonTitle.png" id="35_xtvtm"]
+
+[sub_resource type="Gradient" id="Gradient_ugsjf"]
+colors = PackedColorArray(0, 0.721569, 1, 1, 0, 0.607843, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_68c05"]
+gradient = SubResource("Gradient_ugsjf")
+fill_from = Vector2(1, 1)
 
 [sub_resource type="Gradient" id="Gradient_xpfbk"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -72,23 +72,6 @@ texture_margin_top = 50.0
 texture_margin_bottom = 25.0
 axis_stretch_vertical = 2
 
-[sub_resource type="Gradient" id="Gradient_4lacu"]
-offsets = PackedFloat32Array(0, 0.380952, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.572549, 0.572549, 0.572549, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4lacu"]
-gradient = SubResource("Gradient_4lacu")
-fill_to = Vector2(0, 1)
-
-[sub_resource type="Theme" id="Theme_ax8sm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f234"]
-bg_color = Color(0, 0, 0, 0.611765)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-
 [sub_resource type="Theme" id="Theme_fxbyx"]
 default_font_size = 80
 LineEdit/constants/minimum_character_width = 0
@@ -100,17 +83,6 @@ colors = PackedColorArray(0, 0.341176, 1, 1, 0, 0.756863, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cqpuy"]
 gradient = SubResource("Gradient_br3mg")
 fill_to = Vector2(0, 1)
-
-[sub_resource type="Gradient" id="Gradient_6q50i"]
-offsets = PackedFloat32Array(0, 0.455556, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.572549, 0.572549, 0.572549, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uap65"]
-gradient = SubResource("Gradient_6q50i")
-fill_to = Vector2(0, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gck36"]
-texture = SubResource("GradientTexture2D_uap65")
 
 [node name="BalloonScene" type="Node2D"]
 script = ExtResource("1_qfsef")
@@ -125,16 +97,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_gel8g")
-
-[node name="Clouds" type="TextureRect" parent="CanvasLayer/MainScene"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_4lacu")
+texture = SubResource("GradientTexture2D_68c05")
 
 [node name="BalloonControl" parent="CanvasLayer/MainScene" instance=ExtResource("6_m8k1a")]
 unique_name_in_owner = true
@@ -336,56 +299,20 @@ bbcode_enabled = true
 text = "[center]%[/center]"
 scroll_active = false
 
-[node name="CheckAnswers" type="TextureButton" parent="CanvasLayer/MainScene"]
+[node name="CheckAnswers" type="Button" parent="CanvasLayer/MainScene"]
 layout_mode = 0
-offset_left = 1739.0
-offset_top = 941.0
-offset_right = 1909.0
-offset_bottom = 1016.0
-mouse_default_cursor_shape = 2
-theme = ExtResource("12_r7h5b")
-texture_normal = SubResource("GradientTexture2D_4lacu")
-stretch_mode = 0
-
-[node name="CheckAnswersText" type="RichTextLabel" parent="CanvasLayer/MainScene/CheckAnswers"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 2.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 25
-text = "Check
-Answers"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainScene/CheckAnswers"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 3.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+offset_left = 1744.0
+offset_top = 944.0
+offset_right = 1912.0
+offset_bottom = 1020.0
+text = "Check"
 
 [node name="TeamSlider" type="VSlider" parent="CanvasLayer/MainScene"]
-unique_name_in_owner = true
 layout_mode = 0
 offset_left = -25.0
 offset_top = 348.0
-offset_right = 65.0
-offset_bottom = 780.0
+offset_right = 74.0
+offset_bottom = 786.0
 theme = ExtResource("12_r7h5b")
 max_value = 5.0
 rounded = true
@@ -506,7 +433,6 @@ scroll_active = false
 
 [node name="QuestionPanel" type="Panel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
-z_index = 20
 custom_minimum_size = Vector2(1500, 100)
 layout_mode = 1
 anchors_preset = 5
@@ -517,8 +443,6 @@ offset_top = 10.0
 offset_right = 750.0
 offset_bottom = 155.0
 grow_horizontal = 2
-theme = SubResource("Theme_ax8sm")
-theme_override_styles/panel = SubResource("StyleBoxFlat_5f234")
 
 [node name="QuestionText" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionPanel"]
 unique_name_in_owner = true
@@ -536,26 +460,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = 110
 visible_ratio = 2.0
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainScene/QuestionPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 1506.0
-offset_bottom = 155.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("22_i1pch")
-patch_margin_left = 33
-patch_margin_top = 49
-patch_margin_right = 31
-patch_margin_bottom = 38
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [node name="RemainingBalloon" type="TextureRect" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
@@ -611,7 +515,6 @@ horizontal_alignment = 1
 
 [node name="AnswerBox" type="SpinBox" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 0
 offset_left = 1675.0
 offset_top = 716.0
@@ -635,7 +538,7 @@ scroll_active = false
 [node name="QuestionMenu" type="Panel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
 visible = false
-z_index = 100
+z_index = 10
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -949,6 +852,14 @@ offset_bottom = 75.0
 theme_override_font_sizes/font_size = 32
 text = "Menu"
 
+[node name="ResultsBtn" type="Button" parent="CanvasLayer/MainScene"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 157.0
+offset_right = 178.0
+offset_bottom = 234.0
+text = "Results"
+
 [node name="DEBUG" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
@@ -959,7 +870,6 @@ text = "dsafasdfasdf"
 
 [node name="ResultsScreen" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
@@ -970,7 +880,7 @@ texture = SubResource("GradientTexture2D_cqpuy")
 script = ExtResource("23_cqpuy")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResultsScreen"]
-z_index = 5
+z_index = 20
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -978,9 +888,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 180
-theme_override_constants/margin_top = 150
+theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 220
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 50
 
 [node name="BalloonResults" type="GridContainer" parent="CanvasLayer/ResultsScreen/MarginContainer"]
 unique_name_in_owner = true
@@ -994,10 +904,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("9_jv7cd")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess1" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1005,39 +916,12 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -150.0
-offset_right = -1.0
-offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("21_br3mg")
 theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "[center]76%[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BalloonCircleRed" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1/Guess1" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 1
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1047,10 +931,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("14_t6lb7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess2" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1064,30 +949,6 @@ theme = ExtResource("21_br3mg")
 theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "[center]76%[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BalloonCircleBlue" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2/Guess2" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 0
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1097,10 +958,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("15_le3o5")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess3" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1114,30 +976,6 @@ theme = ExtResource("21_br3mg")
 theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "[center]76%[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BalloonCircleYellow" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3/Guess3" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 0
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1147,10 +985,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("16_f0rqy")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess4" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1164,30 +1003,6 @@ theme = ExtResource("21_br3mg")
 theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "[center]76%[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BalloonCircleGreen" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4/Guess4" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 0
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1197,10 +1012,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("17_f0rqy")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess5" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1214,30 +1030,6 @@ theme = ExtResource("21_br3mg")
 theme_override_font_sizes/normal_font_size = 150
 bbcode_enabled = true
 text = "[center]76%[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BalloonCirclePurple" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5/Guess5" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 0
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1247,10 +1039,11 @@ custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = ExtResource("18_br3mg")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess6" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1268,32 +1061,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleOrange" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6/Guess6" instance=ExtResource("27_ax8sm")]
-show_behind_parent = true
-z_index = -4
-position = Vector2(236.5, 150)
-scale = Vector2(0.8, 0.8)
-
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 0
-offset_left = -56.0
-offset_top = 43.0
-offset_right = 85.0
-offset_bottom = 141.0
-theme = ExtResource("21_br3mg")
-theme_override_colors/default_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 75
-bbcode_enabled = true
-text = "[center]-55[/center]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ResultsBarMargin" type="MarginContainer" parent="CanvasLayer/ResultsScreen"]
-unique_name_in_owner = true
 visible = false
 z_index = 5
 layout_mode = 1
@@ -1310,22 +1078,7 @@ theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 50
 script = ExtResource("8_prrwr")
 
-[node name="ResultsBarPanel" type="Panel" parent="CanvasLayer/ResultsScreen"]
-z_index = 10
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -740.0
-offset_top = 40.0
-offset_right = 740.0
-offset_bottom = 80.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ResultsPercentBar" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel"]
+[node name="ResultsPercentBar" type="TextureRect" parent="CanvasLayer/ResultsScreen"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -1333,32 +1086,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -770.0
-offset_top = -74.0
-offset_right = 750.0
-offset_bottom = 26.0
+offset_left = -760.0
+offset_top = -71.0
+offset_right = 760.0
+offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.5)
 texture = SubResource("GradientTexture1D_ivh13")
 expand_mode = 1
 
-[node name="YellowRedGradientBar" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar"]
-visible = false
-layout_mode = 0
-offset_left = 11.0
-offset_top = 12.0
-offset_right = 1510.0
-offset_bottom = 87.0
-texture = ExtResource("10_eknsk")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResultsScreen/ResultsPercentBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -10.0
-offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -1366,7 +1108,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ResultsPercentSlider" type="HSlider" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer"]
+[node name="ResultsPercentSlider" type="HSlider" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer"]
 unique_name_in_owner = true
 z_index = 5
 custom_minimum_size = Vector2(100, 50)
@@ -1377,8 +1119,7 @@ theme_override_styles/slider = SubResource("StyleBoxTexture_27v4i")
 rounded = true
 tick_count = 100
 
-[node name="RedGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
+[node name="RedGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
 offset_left = -5.0
@@ -1389,8 +1130,7 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("5_syt7c")
 expand_mode = 1
 
-[node name="BlueGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
+[node name="BlueGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
 offset_left = -5.0
@@ -1401,8 +1141,7 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("7_fxbyx")
 expand_mode = 1
 
-[node name="YellowGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
+[node name="YellowGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
 offset_left = -5.0
@@ -1413,8 +1152,7 @@ scale = Vector2(1.5, 1)
 texture = ExtResource("8_lysoq")
 expand_mode = 1
 
-[node name="GreenGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
+[node name="GreenGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
 offset_left = -5.0
@@ -1426,21 +1164,7 @@ texture = ExtResource("9_6aymu")
 expand_mode = 1
 flip_v = true
 
-[node name="PurpleGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
-custom_minimum_size = Vector2(0, 95)
-layout_mode = 0
-offset_left = -5.0
-offset_top = 8.0
-offset_right = 35.0
-offset_bottom = 103.0
-scale = Vector2(1.5, 1)
-texture = ExtResource("11_uvk66")
-expand_mode = 1
-flip_v = true
-
-[node name="OrangeGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-z_index = 5
+[node name="OrangeGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
 offset_left = -5.0
@@ -1452,183 +1176,40 @@ texture = ExtResource("10_r7h5b")
 expand_mode = 1
 flip_v = true
 
-[node name="ResultsGrayBar" type="ColorRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar"]
+[node name="PurpleGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 0
+offset_left = -5.0
+offset_top = 8.0
+offset_right = 35.0
+offset_bottom = 103.0
+scale = Vector2(1.5, 1)
+texture = ExtResource("11_uvk66")
+expand_mode = 1
+flip_v = true
+
+[node name="ResultsBlackBar" type="ColorRect" parent="CanvasLayer/ResultsScreen/ResultsPercentBar"]
 unique_name_in_owner = true
 z_index = 5
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = 37.0
-offset_right = -10.0
-offset_bottom = 112.0
+anchors_preset = -1
+anchor_left = 0.998026
+anchor_top = 0.61
+anchor_right = 0.993421
+anchor_bottom = 0.38
+offset_left = -7.0
+offset_top = -49.0
+offset_bottom = 49.0
 grow_horizontal = 0
 grow_vertical = 2
-rotation = 3.14159
 color = Color(0.185981, 0.185981, 0.185981, 1)
-
-[node name="NextQuestion" type="Button" parent="CanvasLayer/ResultsScreen"]
-layout_mode = 0
-offset_left = 1736.0
-offset_top = 48.0
-offset_right = 1886.0
-offset_bottom = 111.0
-theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 36
-text = "Next"
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/NextQuestion"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 3.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="CheckAnswers" type="Button" parent="CanvasLayer/ResultsScreen"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 548.0
-offset_right = 167.0
-offset_bottom = 656.0
-theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 36
-text = "Check!"
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/CheckAnswers"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 3.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
-z_index = 100
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_gel8g")
-script = ExtResource("34_sdcfj")
-
-[node name="Clouds" type="TextureRect" parent="CanvasLayer/MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 548.0
-offset_bottom = 142.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_4lacu")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 250
-
-[node name="PercentBalloonTitle_en" type="TextureRect" parent="CanvasLayer/MainMenu/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("35_sdcfj")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="PercentBalloonTitle_jp" type="TextureRect" parent="CanvasLayer/MainMenu/MarginContainer/PercentBalloonTitle_en"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -451.5
-offset_top = 125.0
-offset_right = 414.5
-offset_bottom = 274.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("35_xtvtm")
-
-[node name="StartButton" type="Button" parent="CanvasLayer/MainMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -153.5
-offset_top = 189.0
-offset_right = 153.5
-offset_bottom = 334.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 100
-theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
-text = "Start!"
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/StartButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -18.0
-offset_top = -7.0
-offset_right = 18.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("22_i1pch")
-patch_margin_left = 50
-patch_margin_top = 29
-patch_margin_right = 34
-patch_margin_bottom = 38
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="value_changed" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/MainScene/PercentBarMargin" method="_update_percent_guessed"]
-[connection signal="pressed" from="CanvasLayer/MainScene/CheckAnswers" to="." method="_show_results"]
+[connection signal="pressed" from="CanvasLayer/MainScene/CheckAnswers" to="CanvasLayer/MainScene/BalloonControl" method="_check_answers"]
 [connection signal="value_changed" from="CanvasLayer/MainScene/TeamSlider" to="." method="_change_team"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/ConfirmQuestions" to="CanvasLayer/MainScene/QuestionMenu" method="_set_questions"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/CancelQuestions" to="CanvasLayer/MainScene/QuestionMenu" method="_close_menu"]
 [connection signal="pressed" from="CanvasLayer/MainScene/OpenQuestionMenu" to="CanvasLayer/MainScene/QuestionMenu" method="_open_menu"]
-[connection signal="value_changed" from="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider" to="CanvasLayer/ResultsScreen/ResultsBarMargin" method="_update_percent_guessed"]
-[connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestion" to="." method="_next_question"]
-[connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="pressed" from="CanvasLayer/MainScene/ResultsBtn" to="." method="_show_results"]
+[connection signal="value_changed" from="CanvasLayer/ResultsScreen/ResultsPercentBar/MarginContainer/ResultsPercentSlider" to="CanvasLayer/ResultsScreen/ResultsBarMargin" method="_update_percent_guessed"]

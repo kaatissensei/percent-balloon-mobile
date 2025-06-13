@@ -10,16 +10,17 @@ var balloonColor = "White"
 var popped = []
 var tied : bool = true
 
-@onready var parent_position : Vector2 = get_parent().global_position
 @onready var start_position: Vector2 =  position
 
 func _ready() -> void:
-	#print(start_position)
 	rnd = randf_range(0, 1)
 	bob_speed = randf_range(0, max_bob_speed) + 1
 	#self.scale = Vector2(1.0,1.0)
 	popped = [false, false, false, false, false, false] #num_teams = 6
-	
+	#start_position = get_parent().position
+
+func _visibility_changed():
+	pass
 
 func _physics_process(_delta: float) -> void:
 	var time = Time.get_unix_time_from_system()
@@ -30,8 +31,6 @@ func _physics_process(_delta: float) -> void:
 	#bob up and down
 	var y_pos 	= ((1+sin(time * bob_speed)) / 2) * bob_height
 	global_position.y =  start_position.y - y_pos
-	##TRY ADDING PARENT POSITION. IF NOT, MAKE LOCAL BALLOON TSCN
-	##WHY IS PARENT POSITION SO FD ON THE RESULTS??
 	var x_pos = ((1+cos(time * bob_speed / 2)) / 2) * bob_width
 	global_position.x =  start_position.x - x_pos
 	
