@@ -19,7 +19,7 @@ func _ready() -> void:
 	balloon_scale = 0.4 #Main.scale * ratio
 	#var size : float = balloon_size * ratio
 	
-	call_deferred("balloon_gen")
+	await call_deferred("balloon_gen")
 	#balloon_gen()
 
 func get_position():
@@ -46,7 +46,8 @@ func balloon_gen(team_color : String = "Red"):
 	print(self.name + " at " + str(origin.x) + " " + str(origin.y))
 #Create new balloon instance
 	for i in range(100):
-		var newBalloon = Main.BALLOON_LOCAL.instantiate()
+		var newBalloon = Main.BALLOON.instantiate()
+		newBalloon.add_to_group("result_balloons")
 		#add_child(newBalloon)
 		#var rnd = randi_range(-10,10)
 		#newBalloon.transform = 

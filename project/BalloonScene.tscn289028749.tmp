@@ -1,10 +1,10 @@
-[gd_scene load_steps=64 format=3 uid="uid://b5juwfw3grufw"]
+[gd_scene load_steps=61 format=3 uid="uid://b5juwfw3grufw"]
 
 [ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
 [ext_resource type="Texture2D" uid="uid://c8off70hx3i4u" path="res://images/assets/BG_Sky.tres" id="2_gel8g"]
 [ext_resource type="Texture2D" uid="uid://b0ith50w83jxu" path="res://images/assets/basketRed.png" id="2_qe80r"]
 [ext_resource type="Texture2D" uid="uid://dhtk4rf8fwjqy" path="res://images/assets/BG_Clouds.png" id="3_4lacu"]
-[ext_resource type="Shader" uid="uid://cm2qbwulq3xkk" path="res://FallingLines.gdshader" id="3_gck36"]
+[ext_resource type="Texture2D" uid="uid://bdutaop2vi5wj" path="res://images/assets/BG_Underwater.png" id="4_gck36"]
 [ext_resource type="Texture2D" uid="uid://m4vqseva2po" path="res://images/ui/grabber/pb_grabber_red.png" id="5_syt7c"]
 [ext_resource type="PackedScene" uid="uid://bvej8mbofl8ot" path="res://balloonSpawner.tscn" id="6_m8k1a"]
 [ext_resource type="Texture2D" uid="uid://dxmna2v3rsf7u" path="res://images/ui/triangles/pb_triangle_red.png" id="7_8m730"]
@@ -46,23 +46,6 @@
 background_mode = 3
 glow_bloom = 1.0
 glow_hdr_threshold = 0.9
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gck36"]
-frequency = 0.05
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gck36"]
-seamless = true
-noise = SubResource("FastNoiseLite_gck36")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_303ga"]
-shader = ExtResource("3_gck36")
-shader_parameter/noise = SubResource("NoiseTexture2D_gck36")
-shader_parameter/line_color_a = Color(1, 1, 1, 1)
-shader_parameter/line_color_b = Color(0, 0.756863, 0.905882, 1)
-shader_parameter/line_threshold = 0.6
-shader_parameter/inverse_speed = 10.0
-shader_parameter/line_length = 1000.0
-shader_parameter/angle = 90.0
 
 [sub_resource type="Gradient" id="Gradient_xpfbk"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -156,19 +139,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_gel8g")
 
-[node name="Background" type="TextureRect" parent="CanvasLayer/MainScene" groups=["backgrounds"]]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_gel8g")
-expand_mode = 1
-
 [node name="Clouds" type="TextureRect" parent="CanvasLayer/MainScene" groups=["backgrounds"]]
 unique_name_in_owner = true
 visible = false
@@ -179,6 +149,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_4lacu")
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/MainScene" groups=["backgrounds"]]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 85.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gck36")
+expand_mode = 1
 
 [node name="BalloonControl" parent="CanvasLayer/MainScene" instance=ExtResource("6_m8k1a")]
 unique_name_in_owner = true
@@ -217,60 +200,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Students" type="Sprite2D" parent="CanvasLayer/MainScene/BasketContainer"]
-unique_name_in_owner = true
-position = Vector2(957, 809)
-texture = ExtResource("7_ilxei")
-
-[node name="SurprisedFaces" type="Sprite2D" parent="CanvasLayer/MainScene/BasketContainer/Students"]
-unique_name_in_owner = true
-visible = false
-texture = ExtResource("25_6q50i")
-
-[node name="Ties" type="Sprite2D" parent="CanvasLayer/MainScene/BasketContainer/Students"]
-unique_name_in_owner = true
-self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("8_e4gr6")
-
-[node name="Snorkels" type="Sprite2D" parent="CanvasLayer/MainScene/BasketContainer/Students"]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("27_80kup")
-
-[node name="Snorkel Visors" type="Sprite2D" parent="CanvasLayer/MainScene/BasketContainer/Students/Snorkels"]
-show_behind_parent = true
-texture = ExtResource("28_dcspi")
-
-[node name="Basket" type="TextureRect" parent="CanvasLayer/MainScene/BasketContainer/Students"]
+[node name="Basket" type="TextureRect" parent="CanvasLayer/MainScene/BasketContainer"]
 unique_name_in_owner = true
 z_index = 5
 custom_minimum_size = Vector2(0, 150)
-offset_left = -957.0
-offset_top = 121.0
-offset_right = 963.0
-offset_bottom = 271.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 texture = ExtResource("2_qe80r")
 expand_mode = 3
 stretch_mode = 5
-
-[node name="Speed" type="TextureRect" parent="CanvasLayer/MainScene" groups=["backgrounds"]]
-unique_name_in_owner = true
-visible = false
-z_index = 5
-material = SubResource("ShaderMaterial_303ga")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 2.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_gel8g")
-expand_mode = 1
 
 [node name="PercentBarMargin" type="MarginContainer" parent="CanvasLayer/MainScene"]
 z_index = 5
@@ -470,7 +409,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="TeamSlider" type="VSlider" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
-z_index = 10
 layout_mode = 0
 offset_left = -25.0
 offset_top = 348.0
@@ -541,6 +479,31 @@ offset_bottom = 35.0
 texture = ExtResource("18_br3mg")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="Students" type="Sprite2D" parent="CanvasLayer/MainScene"]
+unique_name_in_owner = true
+position = Vector2(957, 809)
+texture = ExtResource("7_ilxei")
+
+[node name="SurprisedFaces" type="Sprite2D" parent="CanvasLayer/MainScene/Students"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("25_6q50i")
+
+[node name="Ties" type="Sprite2D" parent="CanvasLayer/MainScene/Students"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("8_e4gr6")
+
+[node name="Snorkels" type="Sprite2D" parent="CanvasLayer/MainScene/Students"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("27_80kup")
+
+[node name="Snorkel Visors" type="Sprite2D" parent="CanvasLayer/MainScene/Students/Snorkels"]
+show_behind_parent = true
+texture = ExtResource("28_dcspi")
 
 [node name="PercentAnswer" type="RichTextLabel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
@@ -779,7 +742,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q2" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -801,7 +763,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q3" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -823,7 +784,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q4" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -845,7 +805,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q5" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -867,7 +826,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q6" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -889,7 +847,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q7" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -911,7 +868,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q8" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -933,7 +889,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q9" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -955,7 +910,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="Q10" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/MarginContainer/ScrollContainer/Questions"]
 layout_mode = 2
@@ -977,7 +931,6 @@ size_flags_stretch_ratio = 4.0
 theme = ExtResource("15_lysoq")
 placeholder_text = "%"
 alignment = 1
-max_length = 3
 
 [node name="ConfirmQuestions" type="Button" parent="CanvasLayer/MainScene/QuestionMenu"]
 custom_minimum_size = Vector2(250, 75)
@@ -1014,24 +967,6 @@ grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("15_lysoq")
 text = "Cancel"
-
-[node name="LoadJSONQuestions" type="Button" parent="CanvasLayer/MainScene/QuestionMenu"]
-custom_minimum_size = Vector2(250, 75)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 202.0
-offset_top = -95.0
-offset_right = 452.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_default_cursor_shape = 2
-theme = ExtResource("15_lysoq")
-text = "Load"
 
 [node name="Settings" type="Button" parent="CanvasLayer/MainScene/QuestionMenu"]
 custom_minimum_size = Vector2(250, 75)
@@ -1210,6 +1145,7 @@ text = "dsafasdfasdf"
 
 [node name="ResultsScreen" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
@@ -1279,9 +1215,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 1
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1329,9 +1265,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1379,9 +1315,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1429,9 +1365,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1479,9 +1415,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1529,9 +1465,9 @@ visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 0
-offset_left = -80.0
+offset_left = -56.0
 offset_top = 43.0
-offset_right = 120.0
+offset_right = 85.0
 offset_bottom = 141.0
 theme = ExtResource("21_br3mg")
 theme_override_colors/default_color = Color(1, 0, 0, 1)
@@ -1753,7 +1689,6 @@ offset_left = 25.0
 offset_top = 50.0
 offset_right = 175.0
 offset_bottom = 113.0
-mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
 theme_override_font_sizes/font_size = 36
 text = "Back"
@@ -1779,7 +1714,6 @@ offset_left = 1736.0
 offset_top = 50.0
 offset_right = 1886.0
 offset_bottom = 113.0
-mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
 theme_override_font_sizes/font_size = 36
 text = "Next"
@@ -1800,13 +1734,11 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CheckAnswers" type="Button" parent="CanvasLayer/ResultsScreen"]
-unique_name_in_owner = true
 layout_mode = 0
 offset_left = 17.0
 offset_top = 548.0
 offset_right = 167.0
 offset_bottom = 656.0
-mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
 theme_override_font_sizes/font_size = 36
 text = "Check!"
@@ -1827,6 +1759,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -1853,7 +1786,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -221.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
@@ -1881,18 +1813,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_xtvtm")
 
-[node name="StartGame" type="Button" parent="CanvasLayer/MainMenu" groups=["main_menu_btns"]]
-unique_name_in_owner = true
+[node name="StartButton" type="Button" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -310.0
-offset_top = 105.0
-offset_right = 314.0
-offset_bottom = 255.0
+offset_left = -153.5
+offset_top = 189.0
+offset_right = 153.5
+offset_bottom = 334.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
@@ -1911,7 +1842,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
 text = "Start!"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/StartGame"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/StartButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1930,94 +1861,27 @@ patch_margin_bottom = 38
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/StartGame"]
-visible = false
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 1706.0
+offset_top = 777.0
+offset_right = 1850.0
+offset_bottom = 885.0
+theme = ExtResource("15_lysoq")
+text = "Unglow"
 
-[node name="UploadCSV" type="Button" parent="CanvasLayer/MainMenu" groups=["main_menu_btns"]]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -308.0
-offset_top = 298.0
-offset_right = 316.0
-offset_bottom = 398.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(226, 154)
-mouse_default_cursor_shape = 2
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 70
-theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
-theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
-text = "Upload .csv"
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/UploadCSV"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -18.0
-offset_top = -7.0
-offset_right = 18.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("22_i1pch")
-patch_margin_left = 50
-patch_margin_top = 29
-patch_margin_right = 34
-patch_margin_bottom = 38
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/UploadCSV"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 1740.0
+offset_top = 608.0
+offset_right = 1884.0
+offset_bottom = 716.0
+theme = ExtResource("15_lysoq")
+text = "Glow"
 
 [connection signal="value_changed" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/MainScene/PercentBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/MainScene/CheckAnswers" to="." method="_show_results"]
 [connection signal="value_changed" from="CanvasLayer/MainScene/TeamSlider" to="." method="_change_team"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/ConfirmQuestions" to="." method="_set_questions"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/CancelQuestions" to="CanvasLayer/MainScene/QuestionMenu" method="_close_menu"]
-[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadJSONQuestions" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/Settings" to="CanvasLayer/MainScene/QuestionMenu" method="_open_settings"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/ConfirmSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/CancelSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
@@ -2027,7 +1891,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/BackToMain" to="CanvasLayer/ResultsScreen" method="_close_results"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestion" to="." method="_next_question"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
-[connection signal="mouse_entered" from="CanvasLayer/MainMenu/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]
-[connection signal="pressed" from="CanvasLayer/MainMenu/StartGame" to="CanvasLayer/MainMenu" method="_start"]
-[connection signal="mouse_entered" from="CanvasLayer/MainMenu/UploadCSV" to="CanvasLayer/MainMenu" method="_mouseover" binds= [1]]
-[connection signal="pressed" from="CanvasLayer/MainMenu/UploadCSV" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/StartButton" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="CanvasLayer/MainScene/BalloonControl" method="glow_in_the_dark" binds= [false]]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/MainScene/BalloonControl" method="glow_in_the_dark" binds= [true]]

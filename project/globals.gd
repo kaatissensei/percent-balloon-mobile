@@ -2,53 +2,64 @@ extends Node
 
 const colors: Array[String] = ["Blue", "Green", "Orange", "Pink", "Purple", "Red", "Sky_Blue", "Yellow"] #Cyan
 var randColor
-var top_bpr: int = 15 #balloons per row
-var rows: int = 7
-var num_balloons: int = 100
-var num_teams: int = 6
+const top_bpr: int = 15 #balloons per row
+const rows: int = 7
+const num_balloons: int = 100
+const num_teams: int = 6
 var balloons = [] #array of all balloons
 #var balloonsArray = [] #array of above
 var remainingBalloons: Array = []  #array with unpopped balloons. balloon removed when "popped"
 var remainingArray: Array[Array] = [] #array of remainingBalloons[] for each team
 var result_balloons : Array[Array] = []
+var remaining_result_balloons : Array[Array] = []
 var guesses = [] #[0] = team1, etc.
 var answer
 var numToPop = []
 var currentTeam = 0
-var bob_speed: float = 2.5
-var bob_height: float = 5.0
-var bob_width: float = 5.0
+const bob_speed: float = 2.5
+const bob_height: float = 5.0
+const bob_width: float = 5.0
 const textureLoc = "res://images/balloons/"
 var textureName
 const BALLOON = preload("res://balloon.tscn")
 const BALLOON_LOCAL = preload("res://balloon_local.tscn")
-var scale: float = 0.8
+const scale: float = 0.8
+var percent_mode = true
 
 var num_questions : int = 10
 var questions : Array[String] = []
 var answers : Array[int] = []
 var question_num : int = 1   #Current question number
-
+var falls : Array[int] = []
 var csvFile
 var csvArray = []
+var trigger_restore : bool = false
+var trigger_fall : Array[bool]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	questions.resize(num_questions)
 	answers.resize(num_questions)
 	
-	guesses.resize(num_teams)
-	guesses.fill(0)
-	numToPop.resize(num_teams)
-	guesses.fill(0)
-	numToPop.resize(num_teams)
-	numToPop.fill(0)
+	clear_team_array(guesses)
+	clear_team_array(numToPop)
+	clear_team_array(falls)
+	
+	trigger_fall.resize(num_teams)
+	trigger_fall.fill(false)
 	
 	result_balloons.resize(num_teams)
-	
+
+func clear_team_array(array : Array):
+	array.resize(num_teams)
+	array.fill(0)
+
 func build_remaining_array():
 	for i in range(num_teams):
 		remainingArray.append(remainingBalloons.duplicate(true))
+
+func build_remaining_result_balloons():
+	pass
 
 func set_guess(val: int):
 	guesses[currentTeam] = val
@@ -74,7 +85,9 @@ func get_rand_balloon(teamNum: int):
 
 func get_rand_balloons(teamNum: int):
 	var balloonNum = randi_range(0,remainingArray[teamNum].size() - 1)
-	return [remainingArray[teamNum][balloonNum], result_balloons[teamNum][balloonNum]]
+	var remArray_balloon = remainingArray[teamNum][balloonNum]
+	var rrb = remaining_result_balloons[teamNum][balloonNum]
+	return [remArray_balloon, rrb]
 
 func set_current_team(teamNum: int):
 	currentTeam = teamNum
@@ -102,7 +115,6 @@ func parse_csv():
 		questions[i] = arr[0]
 		answers[i] = int(arr[1])
 
-
 func parse_csv_string():
 	questions = csvFile.split(",")
 	questions.pop_front()
@@ -111,4 +123,84 @@ func fullscreen():
 	var mode := DisplayServer.window_get_mode()
 	var is_window: bool = mode != DisplayServer.WINDOW_MODE_FULLSCREEN
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if is_window else DisplayServer.WINDOW_MODE_WINDOWED)
+
+func switch_percent_mode(tf : bool):
+	percent_mode = tf
+
+func reset():
+	#Reset remainingBalloons
+	remainingBalloons.clear()
+	remainingArray.clear()
+	remainingBalloons = balloons.duplicate(true)
+	#for balloon in balloons:
+	#	remainingBalloons.append(balloon)
+	build_remaining_array()
+	#Reset other arrays
+	clear_team_array(guesses)
+	clear_team_array(numToPop)
+	clear_team_array(falls)
+	reset_rrb()
 	
+	set_current_team(0)
+
+func restore_remaining(team_num : int):
+	var new_remBal = balloons.duplicate(true)
+	print("balloons has %d balloons" % balloons.size())
+	remainingArray[team_num].clear()
+	remainingArray[team_num] = new_remBal
+	remaining_result_balloons[team_num].clear()
+	remaining_result_balloons[team_num] = result_balloons[team_num].duplicate(true)
+
+func reset_rrb():
+	#remaining_result_balloons.clear()
+	remaining_result_balloons = result_balloons.duplicate(true)
+
+func fall(team_num : int):
+	falls[team_num] += 1
+
+func get_falls(team_num : int):
+	return falls[team_num]
+
+##Saving
+func save():
+	var save_dict = {
+		"questions" : questions,
+		"answers" : answers
+	}
+	return save_dict
+
+func save_JSON():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	# Call the node's save function.
+	var node_data = call("save")
+
+	# JSON provides a static method to serialized JSON string.
+	var json_string = JSON.stringify(node_data)
+
+	# Store the save dictionary as a new line in the save file.
+	save_file.store_line(json_string)
+
+func load_JSON():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return # Error! We don't have a save to load.
+	
+	# Load the file line by line and process that dictionary to restore
+	# the object it represents.
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+
+		# Creates the helper class to interact with JSON.
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure.
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object.
+		var node_data = json.data
+		questions.assign(node_data["questions"])
+		answers.assign(node_data["answers"])
+		

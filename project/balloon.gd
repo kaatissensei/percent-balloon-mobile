@@ -6,9 +6,11 @@ const bob_width: float = 3.0
 const max_bob_speed: float = 2.5
 var bob_speed: float = 0
 var rnd
+var defaultColor = "White"
 var balloonColor = "White"
 var popped = []
 var tied : bool = true
+#var modulation : Color = "White"
 
 @onready var parent_position : Vector2 = get_parent().global_position
 @onready var start_position: Vector2 =  position
@@ -36,10 +38,23 @@ func _physics_process(_delta: float) -> void:
 	global_position.x =  start_position.x - x_pos
 	
 	#rotation = ((sin(time * 0.5)) / 2) * rnd
+
+func set_default_color(color: String):
+	defaultColor = color
+	set_balloon_color(color)
 	
 func set_balloon_color(color: String):
 	balloonColor = color
-	
+	var textureName = Main.textureLoc + "balloon" + balloonColor + "Sm.png"
+	texture = load(textureName)
+
+#Change texture to glow in the dark without overwriting original color
+func glow():
+	set_balloon_color("Pale_Green")
+
+func no_glow():
+	set_balloon_color(defaultColor)
+
 #Draw balloon string
 func _draw() -> void:
 	if tied:

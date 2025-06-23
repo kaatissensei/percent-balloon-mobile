@@ -7,15 +7,12 @@ var ratio
 var balloon_size #balloonsize
 
 func _ready() -> void:
-	#var screenSize = DisplayServer.window_get_size()
-	#window_width = get_parent().size.x #screenSize.x
-	#window_height = get_parent().size.y #screenSize.y
 	ratio = 1
 	colors = Main.colors
 	balloon_size = 100
 	
 	populate_balloons()
-	
+
 func populate_balloons(color: String = "Default", originX: int = 0, originY: int = 0):
 	var top_bpr = Main.top_bpr
 	var bpr = top_bpr
@@ -65,21 +62,19 @@ func populate_balloons(color: String = "Default", originX: int = 0, originY: int
 		var rnd = randi_range(-10,10)
 		newBalloon.transform = Transform2D(deg_to_rad(float(rnd) / 2), Vector2((xOffset+(balloon_size * x) + rnd)*ratio, 280+y * 70 + rnd - yParabola*2))*ratio #2d(instance int, transform2d(rot, trans)
 		newBalloon.position += Vector2(balloonControlX, balloonControlY)
-		
+		newBalloon.add_to_group("main_balloons")
 		#Set balloon color
 		var randColor = colors[randi() % Main.colors.size()]
 		if color != "Default":
 			randColor = color
 			
-		var textureName = Main.textureLoc + "balloon" + randColor + "Sm.png"
-		newBalloon.texture = load(textureName)
+		
 		newBalloon.scale = Vector2(scale, scale)
 		newBalloon.name = "Balloon" + str(i).pad_zeros(2)
-		newBalloon.set_balloon_color(randColor)
+		newBalloon.set_default_color(randColor)
 		Main.balloons.append(newBalloon)
 		Main.remainingBalloons.append(newBalloon)
 		add_child(newBalloon)
-		
 		
 		x += 1
 	Main.build_remaining_array()
@@ -94,6 +89,9 @@ func _check_answers():
 	for i in range(Main.num_teams):
 		calc_num_to_pop(i)
 		pop_balloons(i)
+		if Main.remainingArray[i].size() <= 0:
+			Main.trigger_fall[i] = true
+			
 	
 			
 func calc_num_to_pop(teamNum: int):
@@ -112,13 +110,18 @@ func pop_balloons(teamNum: int):
 			Main.remainingArray[teamNum].erase(balloon[0])
 			#Result balloon
 			balloon[1].visible = false
-			Main.result_balloons[teamNum].erase(balloon[1])
+			Main.remaining_result_balloons[teamNum].erase(balloon[1])
+		else: #if no more balloons
+			#change characters
+			#change background
+			#reset balloons
+			pass
 	%RemainingBalloonNum.text = str(Main.remainingArray[Main.currentTeam].size())
 	#Update NumPopped text boxes
 	var popped_text = %BalloonResults.get_child(teamNum).get_child(1)
 	popped_text.visible = true
 	popped_text.text = "-%d" % num_to_pop
-			
+
 func show_teams_balloons(teamNum: int):
 	var balloons = Main.balloons
 	for balloon in balloons:
@@ -126,7 +129,30 @@ func show_teams_balloons(teamNum: int):
 			balloon.visible = false
 		else:
 			balloon.visible = true
-	
+
+func reset_balloons():
+	for balloon in get_tree().get_nodes_in_group("main_balloons"):
+		balloon.popped.fill(false)
+		balloon.visible = true
+	for r_balloon in get_tree().get_nodes_in_group("result_balloons"):
+		r_balloon.visible = true
+
+func restore_balloons(team_num : int):
+	for balloon in get_tree().get_nodes_in_group("main_balloons"):
+		balloon.popped[team_num] = false
+		balloon.visible = true
+	##DO THIS LATER---_\
+	for r_balloon in get_tree().get_nodes_in_group("result_balloons"):
+		r_balloon.visible = true
+	Main.restore_remaining(team_num)
+
+func glow_in_the_dark(tf : bool):
+	if tf:
+		for balloon in get_tree().get_nodes_in_group("main_balloons"):
+			balloon.glow()
+	else:
+		for balloon in get_tree().get_nodes_in_group("main_balloons"):
+			balloon.no_glow()
 
 func _print_guess() -> void:
 	print(str(Main.get_guess(0)))

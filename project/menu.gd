@@ -7,17 +7,9 @@ func _ready() -> void:
 	upload_button.pressed.connect(_on_upload_pressed)
 	#file_access_web.load_started.connect(_on_file_load_started)
 	file_access_web.loaded.connect(_on_file_loaded)
-	file_access_web.progress.connect(_on_progress)
+	#file_access_web.progress.connect(_on_progress)
 	file_access_web.error.connect(_on_error)
 
-func _set_questions():
-	#Main.clear_questions()
-	for i in range(Main.num_questions):
-		Main.questions[i] = %Questions.get_child(i).get_child(0).text
-		Main.answers[i] = int(%Questions.get_child(i).get_child(1).text)
-	%QuestionText.text = "Q1: " + Main.questions[0]
-	Main.question_num = 1
-	_close_menu()
 
 func load_question_menu():
 	for i in range(Main.questions.size()):
@@ -31,6 +23,12 @@ func _open_menu():
 
 func _close_menu():
 	visible = false
+
+func _open_settings():
+	%SettingsMenu.visible = true
+
+func _close_settings():
+	%SettingsMenu.visible = false
 
 #WEB FILE ACCESS FUNCTIONS ------------------------------------------------\
 
@@ -60,12 +58,12 @@ func _on_upload_pressed() -> void:
 		#load_question_menu()
 		#%DEBUG.text = Main.csvArray
 
-func _on_progress(current_bytes: int, total_bytes: int) -> void:
-	pass
+#func _on_progress(current_bytes: int, total_bytes: int) -> void:
+#	pass
 	#var percentage: float = float(current_bytes) / float(total_bytes) * 100
 	#progress.value = percentage
 
-func _on_file_loaded(file_name: String, type: String, base64_data: String) -> void:
+func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> void:
 	var utf8_data: String = Marshalls.base64_to_utf8(base64_data)
 	#var string_data: String = base64_data.get_string_from_utf8()
 	var file = FileAccess.open("user://PB_Questions.csv", FileAccess.WRITE)

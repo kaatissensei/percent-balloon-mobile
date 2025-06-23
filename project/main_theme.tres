@@ -1,6 +1,17 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cdnylnkhy48hb"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cdnylnkhy48hb"]
 
 [ext_resource type="Texture2D" uid="uid://g0i6wpeo7yei" path="res://images/ui/grabber/slider grabber pointed sm.png" id="1_470mv"]
+
+[sub_resource type="Gradient" id="Gradient_a2l2q"]
+offsets = PackedFloat32Array(0, 0.72807, 1)
+colors = PackedColorArray(0.462745, 0.462745, 0.462745, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0omi4"]
+gradient = SubResource("Gradient_a2l2q")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_58jnp"]
+texture = SubResource("GradientTexture2D_0omi4")
 
 [sub_resource type="Gradient" id="Gradient_470mv"]
 offsets = PackedFloat32Array(0, 0.359649, 1)
@@ -13,17 +24,31 @@ fill_to = Vector2(0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0omi4"]
 texture = SubResource("GradientTexture2D_a2l2q")
 
+[sub_resource type="Gradient" id="Gradient_0omi4"]
+colors = PackedColorArray(0.473976, 0.473976, 0.473976, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_58jnp"]
+gradient = SubResource("Gradient_0omi4")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_466ly"]
+texture = SubResource("GradientTexture2D_58jnp")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gsqoc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_470mv"]
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.537011, 0.537011, 0.537011, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/styles/focus = SubResource("StyleBoxTexture_0omi4")
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/styles/disabled = SubResource("StyleBoxTexture_58jnp")
+Button/styles/focus = null
 Button/styles/hover = SubResource("StyleBoxTexture_0omi4")
 Button/styles/normal = SubResource("StyleBoxTexture_0omi4")
+Button/styles/pressed = SubResource("StyleBoxTexture_466ly")
 VSlider/constants/center_grabber = 1
 VSlider/icons/grabber = ExtResource("1_470mv")
 VSlider/icons/grabber_highlight = ExtResource("1_470mv")
