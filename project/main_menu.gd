@@ -9,17 +9,16 @@ func _start():
 func _mouseover(btnID : int) -> void:
 	for btn in get_tree().get_nodes_in_group("main_menu_btns"):
 		btn.get_child(0).visible = false
+		btn.get_child(1).visible = true
 
-	
+	var hovered_btn : Button
 	match btnID:
 		1:
-			%UploadCSV.get_child(0).visible = true
-			%UploadCSV.get_child(1).visible = false
-			
-			%StartGame.get_child(1).visible = true
+			hovered_btn = %UploadCSV
+		2:
+			hovered_btn = %StartDemo
 		_:
-			%StartGame.get_child(0).visible = true
-			%StartGame.get_child(1).visible = false
-			
-			%UploadCSV.get_child(1).visible = true
+			hovered_btn = %StartGame
 	
+	hovered_btn.get_child(0).visible = true
+	hovered_btn.get_child(1).visible = false

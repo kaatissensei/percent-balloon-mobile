@@ -1,10 +1,12 @@
 extends Control
 
-@onready var upload_button: Button = %"UploadQuestions" as Button
+@onready var upload_button: Button = %"LoadCSV" as Button
+@onready var main_upload_btn: Button = %"UploadCSV" as Button
 
 func _ready() -> void:
 	## file_access_web functions won't work if you don't connect them!
 	upload_button.pressed.connect(_on_upload_pressed)
+	main_upload_btn.pressed.connect(_on_upload_pressed)
 	#file_access_web.load_started.connect(_on_file_load_started)
 	file_access_web.loaded.connect(_on_file_loaded)
 	#file_access_web.progress.connect(_on_progress)
@@ -66,6 +68,12 @@ func _on_upload_pressed() -> void:
 func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> void:
 	var utf8_data: String = Marshalls.base64_to_utf8(base64_data)
 	#var string_data: String = base64_data.get_string_from_utf8()
+	#Hide Main Menu
+	if %MainMenu.visible:
+		%MainMenu._start()
+	if %LoadMenu.visible:
+		%LoadMenu.visible = false
+		
 	var file = FileAccess.open("user://PB_Questions.csv", FileAccess.WRITE)
 	if FileAccess.file_exists("user://PB_Questions.csv"):
 		file.store_string(utf8_data)
@@ -76,3 +84,10 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 		%DEBUG.text = Main.csvArray
 	else:
 		%DEBUG.text = "Can't find file."
+	
+
+		
+
+
+func _open_load_menu() -> void:
+	%LoadMenu.visible = true

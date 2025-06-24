@@ -18,6 +18,12 @@ func _ready() -> void:
 	%SurprisedFaces.visible = false
 	%Snorkels.visible = false
 
+func _start_demo():
+	Main.load_demo_csv()
+	%MainMenu.visible = false
+	%ResultsScreen.visible = false
+	Main.reset_rrb()
+
 func _change_team(teamNum: int):
 	var currentTeam = int(teamNum)
 	Main.currentTeam = currentTeam
@@ -199,3 +205,9 @@ func fall_animation():
 func _load_json() -> void:
 	Main.load_JSON()
 	%QuestionMenu.load_question_menu()
+	%LoadMenu.visible = false
+
+func _load_demo() -> void:
+	Main.load_demo_csv()
+	%QuestionMenu.load_question_menu()
+	%LoadMenu.visible = false

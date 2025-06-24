@@ -1015,24 +1015,6 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("15_lysoq")
 text = "Cancel"
 
-[node name="LoadJSONQuestions" type="Button" parent="CanvasLayer/MainScene/QuestionMenu"]
-custom_minimum_size = Vector2(250, 75)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 202.0
-offset_top = -95.0
-offset_right = 452.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_default_cursor_shape = 2
-theme = ExtResource("15_lysoq")
-text = "Load"
-
 [node name="Settings" type="Button" parent="CanvasLayer/MainScene/QuestionMenu"]
 custom_minimum_size = Vector2(250, 75)
 layout_mode = 1
@@ -1069,7 +1051,7 @@ grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("15_lysoq")
 theme_override_font_sizes/font_size = 40
-text = "Upload .csv"
+text = "Load"
 
 [node name="SettingsMenu" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu"]
 unique_name_in_owner = true
@@ -1172,6 +1154,84 @@ text = "On
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LoadJSONQuestions" type="Button" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu"]
+custom_minimum_size = Vector2(250, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 202.0
+offset_top = -95.0
+offset_right = 452.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_lysoq")
+text = "Load"
+
+[node name="LoadMenu" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu"]
+unique_name_in_owner = true
+z_index = 100
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -180.5
+offset_right = 491.0
+offset_bottom = 181.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadFrom" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionMenu/LoadMenu"]
+layout_mode = 0
+offset_right = 979.0
+offset_bottom = 157.0
+theme = ExtResource("15_lysoq")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 70
+text = "Load from..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadButtons" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/LoadMenu"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -189.0
+offset_right = -48.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="LoadCSV" type="Button" parent="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = ".csv File"
+
+[node name="LoadCache" type="Button" parent="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Autosave"
+
+[node name="LoadDemo" type="Button" parent="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Demo"
 
 [node name="OpenQuestionMenu" type="Button" parent="CanvasLayer/MainScene"]
 custom_minimum_size = Vector2(200, 75)
@@ -1827,6 +1887,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -1853,7 +1914,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -221.0
+offset_bottom = -306.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
@@ -1881,20 +1942,22 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_xtvtm")
 
-[node name="StartGame" type="Button" parent="CanvasLayer/MainMenu" groups=["main_menu_btns"]]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -310.0
-offset_top = 105.0
-offset_right = 314.0
-offset_bottom = 255.0
+anchor_bottom = 1.0
+offset_left = -337.0
+offset_top = 606.0
+offset_right = 337.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="StartGame" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
+unique_name_in_owner = true
+layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -1911,7 +1974,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
 text = "Start!"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/StartGame"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/VBoxContainer/StartGame"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1930,7 +1993,7 @@ patch_margin_bottom = 38
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/StartGame"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/VBoxContainer/StartGame"]
 visible = false
 show_behind_parent = true
 layout_mode = 1
@@ -1946,21 +2009,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="UploadCSV" type="Button" parent="CanvasLayer/MainMenu" groups=["main_menu_btns"]]
+[node name="UploadCSV" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -308.0
-offset_top = 298.0
-offset_right = 316.0
-offset_bottom = 398.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(226, 154)
+layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -1977,7 +2028,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
 text = "Upload .csv"
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/UploadCSV"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/VBoxContainer/UploadCSV"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1997,7 +2048,61 @@ patch_margin_bottom = 38
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/UploadCSV"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/VBoxContainer/UploadCSV"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="StartDemo" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 70
+theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gck36")
+theme_override_styles/normal = SubResource("StyleBoxTexture_gck36")
+text = "Start Demo"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/MainMenu/VBoxContainer/StartDemo"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -7.0
+offset_right = 18.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_i1pch")
+patch_margin_left = 50
+patch_margin_top = 29
+patch_margin_right = 34
+patch_margin_bottom = 38
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu/VBoxContainer/StartDemo"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -2017,17 +2122,21 @@ color = Color(0, 0, 0, 1)
 [connection signal="value_changed" from="CanvasLayer/MainScene/TeamSlider" to="." method="_change_team"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/ConfirmQuestions" to="." method="_set_questions"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/CancelQuestions" to="CanvasLayer/MainScene/QuestionMenu" method="_close_menu"]
-[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadJSONQuestions" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/Settings" to="CanvasLayer/MainScene/QuestionMenu" method="_open_settings"]
+[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/UploadQuestions" to="CanvasLayer/MainScene/QuestionMenu" method="_open_load_menu"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/ConfirmSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/CancelSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="toggled" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PercentModeButton" to="." method="switch_percent_mode"]
+[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/LoadJSONQuestions" to="." method="_load_json"]
+[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadCache" to="." method="_load_json"]
+[connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadDemo" to="." method="_load_demo"]
 [connection signal="pressed" from="CanvasLayer/MainScene/OpenQuestionMenu" to="CanvasLayer/MainScene/QuestionMenu" method="_open_menu"]
 [connection signal="value_changed" from="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider" to="CanvasLayer/ResultsScreen/ResultsBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/BackToMain" to="CanvasLayer/ResultsScreen" method="_close_results"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestion" to="." method="_next_question"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
-[connection signal="mouse_entered" from="CanvasLayer/MainMenu/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]
-[connection signal="pressed" from="CanvasLayer/MainMenu/StartGame" to="CanvasLayer/MainMenu" method="_start"]
-[connection signal="mouse_entered" from="CanvasLayer/MainMenu/UploadCSV" to="CanvasLayer/MainMenu" method="_mouseover" binds= [1]]
-[connection signal="pressed" from="CanvasLayer/MainMenu/UploadCSV" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/UploadCSV" to="CanvasLayer/MainMenu" method="_mouseover" binds= [1]]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="CanvasLayer/MainMenu" method="_mouseover" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="." method="_start_demo"]

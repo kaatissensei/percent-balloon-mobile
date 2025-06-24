@@ -36,8 +36,11 @@ var csvArray = []
 var trigger_restore : bool = false
 var trigger_fall : Array[bool]
 
+var demo_csv
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	load_demo_csv()
 	questions.resize(num_questions)
 	answers.resize(num_questions)
 	
@@ -116,8 +119,18 @@ func parse_csv():
 		answers[i] = int(arr[1])
 
 func parse_csv_string():
-	questions = csvFile.split(",")
+	var comma_pos : int
+	var split_by_line = csvFile.split("\n")
+	var csv_questions : Array[Array]
+	questions.clear()
+	answers.clear()
+	for q in split_by_line:
+		comma_pos = q.rfind(",")
+		questions.push_back(q.substr(0,comma_pos))
+		answers.push_back(int(q.substr(comma_pos + 1)))
+	#Remove headers
 	questions.pop_front()
+	answers.pop_front()
 	
 func fullscreen():
 	var mode := DisplayServer.window_get_mode()
@@ -204,3 +217,17 @@ func load_JSON():
 		questions.assign(node_data["questions"])
 		answers.assign(node_data["answers"])
 		
+func load_demo_csv() :
+	demo_csv = "Question,Answer
+What percent of students like science?,66
+What percent play games?,81
+What percent play the piano?,25
+What percent said their favorite fruit is apples?,18
+What percent said their favorite sport was soccer?,27
+What percent watch TV every day?,61
+What percent study English every day?,4
+What percent have only one sibling?,48
+What percent eat breakfast every day?,80
+What percent never read books?,18"
+	csvFile = demo_csv
+	parse_csv_string()
