@@ -87,3 +87,6 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 
 func _open_load_menu() -> void:
 	%LoadMenu.visible = true
+
+func _potato_mode():
+	%BalloonControl.freeze_balloons()

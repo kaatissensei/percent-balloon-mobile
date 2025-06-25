@@ -136,6 +136,19 @@ func switch_percent_mode(toggled_on: bool) -> void:
 		text_box.text = "Off"
 		text_box.add_theme_color_override("default_color", Color.WHITE)
 
+func switch_potato_mode(toggled_on: bool) -> void:
+	var tf = toggled_on
+	var text_box = %PotatoModeButton.get_child(0)
+	
+	%BalloonControl.freeze_balloons(tf)
+	if !tf:
+		text_box.text = "On"
+		text_box.add_theme_color_override("default_color", Color.BLACK)
+	else:
+		text_box.text = "Off"
+		text_box.add_theme_color_override("default_color", Color.WHITE)
+	
+	
 func reset():
 	reset_guesses()
 	Main.reset()

@@ -156,3 +156,9 @@ func glow_in_the_dark(tf : bool):
 
 func _print_guess() -> void:
 	print(str(Main.get_guess(0)))
+
+func freeze_balloons(tf : bool):
+	for balloon in get_tree().get_nodes_in_group("main_balloons"):
+		balloon.set_physics_process(!tf)
+	for balloon in get_tree().get_nodes_in_group("result_balloons"):
+		balloon.set_physics_process(!tf)

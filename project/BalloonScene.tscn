@@ -399,6 +399,33 @@ expand_mode = 1
 stretch_mode = 5
 flip_v = true
 
+[node name="PercentGuessedMoving" type="RichTextLabel" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+clip_contents = false
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+offset_left = -42.0
+offset_top = -65.0
+offset_right = 78.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "100
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PGMTimer" type="Timer" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
+unique_name_in_owner = true
+
 [node name="PercentGuessed" type="RichTextLabel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
 z_index = 10
@@ -733,7 +760,6 @@ scroll_active = false
 
 [node name="QuestionMenu" type="Panel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
-visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 8
@@ -1073,7 +1099,6 @@ text = "Load"
 
 [node name="SettingsMenu" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1156,6 +1181,35 @@ toggle_mode = true
 text = "(%) Percent Mode:               "
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PercentModeButton"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 75
+text = "On
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotatoModeButton" type="Button" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Turn off if your computer is lagging."
+mouse_default_cursor_shape = 2
+theme = ExtResource("15_lysoq")
+theme_override_font_sizes/font_size = 75
+toggle_mode = true
+text = "Balloon Movement:                 "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PotatoModeButton"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 1
 anchors_preset = 11
@@ -1303,6 +1357,7 @@ text = "dsafasdfasdf"
 
 [node name="ResultsScreen" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
@@ -1948,6 +2003,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -2545,6 +2601,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [connection signal="value_changed" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/MainScene/PercentBarMargin" method="_update_percent_guessed"]
+[connection signal="timeout" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider/PGMTimer" to="CanvasLayer/MainScene/PercentBarMargin" method="hide_percent_guessed_moving"]
 [connection signal="pressed" from="CanvasLayer/MainScene/CheckAnswers" to="." method="_show_results"]
 [connection signal="value_changed" from="CanvasLayer/MainScene/TeamSlider" to="." method="_change_team"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/ConfirmQuestions" to="." method="_set_questions"]
@@ -2554,6 +2611,7 @@ stretch_mode = 5
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/ConfirmSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/CancelSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="toggled" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PercentModeButton" to="." method="switch_percent_mode"]
+[connection signal="toggled" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PotatoModeButton" to="." method="switch_potato_mode"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/LoadJSONQuestions" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadCache" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadDemo" to="." method="_load_demo"]
