@@ -98,6 +98,8 @@ func reset_guesses():
 
 func _show_results() -> void:
 	%ResultsScreen.open()
+	if Main.question_num >= Main.num_questions:
+		%NextQuestionBtn.visible = false
 
 func _next_question() -> void:
 	%CheckAnswers.disabled = false
@@ -107,8 +109,8 @@ func _next_question() -> void:
 	reset_guesses()
 
 func load_question_text():
-	var q_num : int = Main.question_num - 1
-	%QuestionText.text = "Q%d: " % q_num + Main.questions[q_num]
+	var q_num : int = Main.question_num
+	%QuestionText.text = "Q%d: " % q_num + Main.questions[q_num - 1]
 
 func update_markers():
 	var guess_val

@@ -1,7 +1,7 @@
 extends Control
 
 var final_scores : Array[int]
-var height : int
+var height : float
 var time : float
 var winner_order : Array[int]
 var team_placements : Array[int]
@@ -13,7 +13,7 @@ func _ready() -> void:
 	final_scores.resize(6)
 	winner_order.resize(6)
 	team_placements.resize(6)
-	load_scores
+	#load_scores()
 
 func get_final_scores():
 	for i in range(Main.num_teams):
@@ -35,7 +35,7 @@ func show_final_results():
 		var adjusted_score : float = final_scores[i]-sorted_scores[0]
 		var fraction : float = adjusted_score / score_range #Don't forget to convert to float
 
-		var height = 725 - (550 * (fraction))
+		height = 725 - (550 * (fraction))
 		%CollisionObjects.get_child(i).position.y = height
 		%FinalBalloons.get_child(i).start_moving()
 

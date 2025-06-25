@@ -681,10 +681,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
+theme_override_fonts/normal_font = ExtResource("43_80kup")
 theme_override_font_sizes/normal_font_size = 100
 text = "100"
 scroll_active = false
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BalloonOriginalTotal" type="RichTextLabel" parent="CanvasLayer/MainScene/RemainingBalloon/RemainingBalloonNum"]
 layout_mode = 1
@@ -698,11 +700,13 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("43_80kup")
 theme_override_font_sizes/normal_font_size = 42
 text = "/100"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnswerBox" type="SpinBox" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
@@ -1862,7 +1866,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="NextQuestion" type="Button" parent="CanvasLayer/ResultsScreen"]
+[node name="NextQuestionBtn" type="Button" parent="CanvasLayer/ResultsScreen"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 1736.0
 offset_top = 50.0
@@ -1873,7 +1878,7 @@ theme = ExtResource("12_r7h5b")
 theme_override_font_sizes/font_size = 36
 text = "Next"
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/NextQuestion"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/NextQuestionBtn"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -2012,6 +2017,7 @@ theme_override_constants/separation = 50
 
 [node name="StartGame" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
@@ -2021,7 +2027,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 110
 theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
@@ -2035,7 +2041,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -18.0
-offset_top = -7.0
+offset_top = -14.0
 offset_right = 18.0
 offset_bottom = 10.0
 grow_horizontal = 2
@@ -2066,6 +2072,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="UploadCSV" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
@@ -2075,7 +2082,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 65
 theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
@@ -2120,6 +2127,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="StartDemo" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" groups=["main_menu_btns"]]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
@@ -2129,7 +2137,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 65
 theme_override_styles/focus = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gck36")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gck36")
@@ -2442,7 +2450,6 @@ anchor_right = 1.0
 offset_bottom = 196.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 20
-theme_override_fonts/normal_font = ExtResource("43_80kup")
 theme_override_font_sizes/normal_font_size = 100
 text = "Final Scores"
 horizontal_alignment = 1
@@ -2554,7 +2561,7 @@ stretch_mode = 5
 [connection signal="pressed" from="CanvasLayer/MainScene/Fullscreen" to="." method="fullscreen"]
 [connection signal="value_changed" from="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider" to="CanvasLayer/ResultsScreen/ResultsBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/BackToMain" to="CanvasLayer/ResultsScreen" method="_close_results"]
-[connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestion" to="." method="_next_question"]
+[connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestionBtn" to="." method="_next_question"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/FinishGame" to="." method="_go_to_final_scores"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
 [connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]

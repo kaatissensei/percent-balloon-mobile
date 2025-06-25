@@ -121,7 +121,7 @@ func parse_csv():
 func parse_csv_string():
 	var comma_pos : int
 	var split_by_line = csvFile.split("\n")
-	var csv_questions : Array[Array]
+	#var csv_questions : Array[Array]
 	questions.clear()
 	answers.clear()
 	for q in split_by_line:
