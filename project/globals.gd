@@ -35,8 +35,9 @@ var csvFile
 var csvArray = []
 var trigger_restore : bool = false
 var trigger_fall : Array[bool]
-
 var demo_csv
+
+@onready var redBalloon = preload("res://images/balloons/balloonRedSm.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
