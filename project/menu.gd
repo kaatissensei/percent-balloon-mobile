@@ -73,7 +73,7 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 		%MainMenu._start()
 	if %LoadMenu.visible:
 		%LoadMenu.visible = false
-		
+	
 	var file = FileAccess.open("user://PB_Questions.csv", FileAccess.WRITE)
 	if FileAccess.file_exists("user://PB_Questions.csv"):
 		file.store_string(utf8_data)
@@ -84,10 +84,6 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 		%DEBUG.text = Main.csvArray
 	else:
 		%DEBUG.text = "Can't find file."
-	
-
-		
-
 
 func _open_load_menu() -> void:
 	%LoadMenu.visible = true

@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func _start_demo():
 	Main.load_demo_csv()
+	load_question_text()
 	%MainMenu.visible = false
 	%ResultsScreen.visible = false
 	Main.reset_rrb()
@@ -29,11 +30,9 @@ func _change_team(teamNum: int):
 	Main.currentTeam = currentTeam
 	var basketColor = "Red"
 	var tintColor
-	
-	
 
 	load_bg(currentTeam)
-		
+	
 	#updateBalloons()
 	match (currentTeam):
 		0:
@@ -86,9 +85,9 @@ func _change_team(teamNum: int):
 		fall_animation()
 
 func reset_guesses():
-	for i in range(Main.num_teams-1, -1, -1):
+	for i in range(Main.num_teams):
 		#_change_team(i)
-		%ResultsBarMargin._update_percent_guessed(0)
+		%ResultsBarMargin._update_percent_guessed(0, i)
 		update_markers()
 		%PercentSlider.value = 0
 		%TeamSlider.value = 0
@@ -108,7 +107,7 @@ func _next_question() -> void:
 	reset_guesses()
 
 func load_question_text():
-	var q_num : int = Main.question_num
+	var q_num : int = Main.question_num - 1
 	%QuestionText.text = "Q%d: " % q_num + Main.questions[q_num]
 
 func update_markers():
@@ -205,9 +204,21 @@ func fall_animation():
 func _load_json() -> void:
 	Main.load_JSON()
 	%QuestionMenu.load_question_menu()
+	load_question_text()
 	%LoadMenu.visible = false
 
 func _load_demo() -> void:
 	Main.load_demo_csv()
+	Main.parse_csv_string()
 	%QuestionMenu.load_question_menu()
+	load_question_text()
 	%LoadMenu.visible = false
+
+
+func _go_to_final_scores() -> void:
+	%FinalScores.visible = true
+	%FinalScores.load_scores()
+
+func fullscreen():
+	Main.fullscreen()
+	

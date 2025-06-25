@@ -40,7 +40,6 @@ var demo_csv
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_demo_csv()
 	questions.resize(num_questions)
 	answers.resize(num_questions)
 	
@@ -53,9 +52,9 @@ func _ready() -> void:
 	
 	result_balloons.resize(num_teams)
 
-func clear_team_array(array : Array):
+func clear_team_array(array : Array, value = 0):
 	array.resize(num_teams)
-	array.fill(0)
+	array.fill(value)
 
 func build_remaining_array():
 	for i in range(num_teams):
@@ -64,8 +63,8 @@ func build_remaining_array():
 func build_remaining_result_balloons():
 	pass
 
-func set_guess(val: int):
-	guesses[currentTeam] = val
+func set_guess(val: int, team_num : int = currentTeam):
+	guesses[team_num] = val
 	
 func get_guess(team_num: int):
 	return guesses[team_num]
@@ -106,7 +105,8 @@ func clear_questions():
 
 func parse_csv():
 	var csv_line_len = 2 #number of elements per csv line
-	
+	clear_questions()
+	csvArray.clear()
 	while csvFile.get_position() < csvFile.get_length():
 		var csvLine = csvFile.get_csv_line()
 		csvArray.push_back(csvLine)
@@ -152,13 +152,13 @@ func reset():
 	clear_team_array(guesses)
 	clear_team_array(numToPop)
 	clear_team_array(falls)
+	clear_team_array(trigger_fall, false)
 	reset_rrb()
 	
 	set_current_team(0)
 
 func restore_remaining(team_num : int):
 	var new_remBal = balloons.duplicate(true)
-	print("balloons has %d balloons" % balloons.size())
 	remainingArray[team_num].clear()
 	remainingArray[team_num] = new_remBal
 	remaining_result_balloons[team_num].clear()
@@ -214,6 +214,7 @@ func load_JSON():
 
 		# Get the data from the JSON object.
 		var node_data = json.data
+		clear_questions()
 		questions.assign(node_data["questions"])
 		answers.assign(node_data["answers"])
 		
@@ -230,4 +231,4 @@ What percent have only one sibling?,48
 What percent eat breakfast every day?,80
 What percent never read books?,18"
 	csvFile = demo_csv
-	parse_csv_string()
+	#parse_csv_string()
