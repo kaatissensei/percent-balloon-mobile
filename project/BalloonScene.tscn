@@ -760,6 +760,7 @@ scroll_active = false
 
 [node name="QuestionMenu" type="Panel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 layout_mode = 1
 anchors_preset = 8
@@ -1099,6 +1100,7 @@ text = "Load"
 
 [node name="SettingsMenu" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1357,7 +1359,6 @@ text = "dsafasdfasdf"
 
 [node name="ResultsScreen" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
@@ -2003,7 +2004,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
