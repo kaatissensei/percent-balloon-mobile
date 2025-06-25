@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func _start_demo():
 	Main.load_demo_csv()
+	Main.parse_csv_string()
 	load_question_text()
 	%MainMenu.visible = false
 	%ResultsScreen.visible = false
