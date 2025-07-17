@@ -4,10 +4,10 @@ extends Node2D
 var symbol
 var current_falls
 
-@onready var bg_sky = preload("res://images/assets/BG_Sky.tres")
-@onready var bg_fujisan = preload("res://images/assets/BG_Fujisan.png")
-@onready var bg_underwater = preload("res://images/assets/BG_Underwater.png")
-@onready var bg_deep_sea = preload("res://images/assets/BG_Deep_Sea.tres")
+@onready var bg_sky = load("res://images/assets/BG_Sky.tres")
+@onready var bg_fujisan = load("res://images/assets/BG_Fujisan.png")
+@onready var bg_underwater = load("res://images/assets/BG_Underwater.png")
+@onready var bg_deep_sea = load("res://images/assets/BG_Deep_Sea.tres")
 
 
 func _ready() -> void:

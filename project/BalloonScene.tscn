@@ -2209,6 +2209,7 @@ color = Color(0.0383972, 0.0383972, 0.0383972, 1)
 
 [node name="ColorRectRight" type="ColorRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/ColorRectLeft"]
 z_index = 5
+layout_mode = 0
 offset_left = 1504.0
 offset_top = 0.333313
 offset_right = 1520.0
