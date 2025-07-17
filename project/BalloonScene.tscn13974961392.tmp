@@ -237,17 +237,17 @@ fill_to = Vector2(0, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gck36"]
 texture = SubResource("GradientTexture2D_uap65")
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dcspi"]
+b = Vector2(16, 0)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qvco6"]
 radius = 88.0
 height = 224.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dcspi"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcspi"]
 bg_color = Color(0, 0, 0.509804, 0.443137)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_dcspi"]
-b = Vector2(1800, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dcspi"]
 
 [node name="BalloonScene" type="Node2D"]
 script = ExtResource("1_qfsef")
@@ -259,7 +259,6 @@ environment = SubResource("Environment_303ga")
 unique_name_in_owner = true
 
 [node name="MainScene" type="TextureRect" parent="CanvasLayer"]
-unique_name_in_owner = true
 z_index = -5
 anchors_preset = 15
 anchor_right = 1.0
@@ -430,7 +429,6 @@ tick_count = 100
 ticks_on_borders = true
 
 [node name="RedGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 7
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -442,7 +440,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="BlueGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 6
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -454,7 +451,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="YellowGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 5
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -466,7 +462,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="GreenGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 4
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -478,7 +473,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="PurpleGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 3
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -490,7 +484,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="OrangeGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 2
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -502,7 +495,6 @@ stretch_mode = 5
 flip_v = true
 
 [node name="Sky_BlueGuess" type="TextureRect" parent="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider"]
-z_index = 1
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 0
 offset_top = 45.0
@@ -768,7 +760,7 @@ scroll_active = false
 
 [node name="QuestionPanel" type="Panel" parent="CanvasLayer/MainScene"]
 unique_name_in_owner = true
-z_index = 60
+z_index = 20
 custom_minimum_size = Vector2(1500, 100)
 layout_mode = 1
 anchors_preset = 5
@@ -1369,20 +1361,19 @@ text = "On
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NumberTeams" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/NumberTeams"]
+[node name="Panel" type="Panel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 theme = ExtResource("15_lysoq")
 theme_override_styles/panel = SubResource("StyleBoxFlat_jra0m")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/NumberTeams/Panel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer/Panel"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1400,8 +1391,7 @@ text = "Number of Teams:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NumTeamsSpinbox" type="SpinBox" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/NumberTeams"]
-unique_name_in_owner = true
+[node name="SpinBox" type="SpinBox" parent="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_jra0m")
@@ -1553,7 +1543,7 @@ text = "dsafasdfasdf"
 
 [node name="ResultsScreen" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-z_index = 50
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1562,7 +1552,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_cqpuy")
 script = ExtResource("23_cqpuy")
 
-[node name="TeamResults" type="MarginContainer" parent="CanvasLayer/ResultsScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ResultsScreen"]
 z_index = 5
 layout_mode = 1
 anchors_preset = 15
@@ -1575,14 +1565,14 @@ theme_override_constants/margin_top = 150
 theme_override_constants/margin_right = 170
 theme_override_constants/margin_bottom = 20
 
-[node name="BalloonResults" type="GridContainer" parent="CanvasLayer/ResultsScreen/TeamResults"]
+[node name="BalloonResults" type="GridContainer" parent="CanvasLayer/ResultsScreen/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 150
-columns = 4
+columns = 3
 
-[node name="Team1" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team1" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1590,7 +1580,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess1" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team1"]
+[node name="Guess1" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1611,13 +1601,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleRed" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team1/Guess1" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleRed" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1/Guess1" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team1"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team1"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1635,7 +1625,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team2" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team2" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1643,7 +1633,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess2" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team2"]
+[node name="Guess2" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1661,13 +1651,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleBlue" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team2/Guess2" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleBlue" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2/Guess2" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team2"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team2"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1685,7 +1675,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team3" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team3" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1693,7 +1683,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess3" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team3"]
+[node name="Guess3" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1711,13 +1701,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleYellow" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team3/Guess3" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleYellow" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3/Guess3" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team3"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team3"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1735,7 +1725,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team4" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team4" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1743,7 +1733,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess4" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team4"]
+[node name="Guess4" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1761,13 +1751,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleGreen" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team4/Guess4" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleGreen" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4/Guess4" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team4"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team4"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1785,7 +1775,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team5" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team5" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1793,7 +1783,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess5" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team5"]
+[node name="Guess5" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1811,13 +1801,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCirclePurple" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team5/Guess5" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCirclePurple" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5/Guess5" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team5"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team5"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1835,7 +1825,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team6" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team6" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1843,7 +1833,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess6" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team6"]
+[node name="Guess6" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1861,13 +1851,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleOrange" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team6/Guess6" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleOrange" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6/Guess6" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team6"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team6"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1885,7 +1875,8 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team7" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team7" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
+visible = false
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1893,7 +1884,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess7" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team7"]
+[node name="Guess7" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team7"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1911,13 +1902,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCircleSky_Blue" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team7/Guess7" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCircleSky_Blue" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team7/Guess7" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team7"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team7"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1935,7 +1926,8 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Team8" type="TextureRect" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
+[node name="Team8" type="TextureRect" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults"]
+visible = false
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1943,7 +1935,7 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Guess8" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team8"]
+[node name="Guess8" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team8"]
 clip_contents = false
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 1
@@ -1961,13 +1953,13 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BalloonCirclePink" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team8/Guess8" groups=["balloon_circles"] instance=ExtResource("27_ax8sm")]
+[node name="BalloonCirclePink" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team8/Guess8" instance=ExtResource("27_ax8sm")]
 show_behind_parent = true
 z_index = -4
-position = Vector2(177, 150)
+position = Vector2(236.5, 150)
 scale = Vector2(0.8, 0.8)
 
-[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team8"]
+[node name="NumPopped" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/MarginContainer/BalloonResults/Team8"]
 visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 10)
@@ -1984,13 +1976,6 @@ text = "[center]-55[/center]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ResultsFiller" type="Control" parent="CanvasLayer/ResultsScreen/TeamResults/BalloonResults"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="ResultsBarMargin" type="MarginContainer" parent="CanvasLayer/ResultsScreen"]
 unique_name_in_owner = true
@@ -2142,7 +2127,6 @@ expand_mode = 1
 flip_v = true
 
 [node name="OrangeGuess" type="TextureRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider"]
-unique_name_in_owner = true
 z_index = 5
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 0
@@ -2199,22 +2183,6 @@ grow_vertical = 2
 rotation = 3.14159
 color = Color(0.185981, 0.185981, 0.185981, 1)
 
-[node name="ColorRectLeft" type="ColorRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar"]
-z_index = 5
-layout_mode = 2
-offset_left = 10.0
-offset_right = 26.0
-offset_bottom = 100.0
-color = Color(0.0383972, 0.0383972, 0.0383972, 1)
-
-[node name="ColorRectRight" type="ColorRect" parent="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/ColorRectLeft"]
-z_index = 5
-offset_left = 1504.0
-offset_top = 0.333313
-offset_right = 1520.0
-offset_bottom = 100.333
-color = Color(0.0383972, 0.0383972, 0.0383972, 1)
-
 [node name="ResultsText" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/ResultsBarPanel"]
 unique_name_in_owner = true
 z_index = 30
@@ -2242,13 +2210,13 @@ vertical_alignment = 1
 
 [node name="BackToMain" type="Button" parent="CanvasLayer/ResultsScreen"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 48.0
-offset_right = 192.0
-offset_bottom = 128.0
+offset_left = 25.0
+offset_top = 50.0
+offset_right = 175.0
+offset_bottom = 113.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 36
 text = "Back"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/BackToMain"]
@@ -2269,13 +2237,13 @@ color = Color(0, 0, 0, 1)
 [node name="NextQuestionBtn" type="Button" parent="CanvasLayer/ResultsScreen"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1728.0
-offset_top = 48.0
-offset_right = 1904.0
-offset_bottom = 128.0
+offset_left = 1736.0
+offset_top = 50.0
+offset_right = 1886.0
+offset_bottom = 113.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 36
 text = "Next"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/NextQuestionBtn"]
@@ -2294,17 +2262,16 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="FinishGame" type="Button" parent="CanvasLayer/ResultsScreen"]
-z_index = 50
+z_index = 500
 layout_mode = 0
-offset_left = 1744.0
+offset_left = 1648.0
 offset_top = 1000.0
 offset_right = 1902.0
-offset_bottom = 1068.0
+offset_bottom = 1063.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 24
-text = "Finish
-Game"
+theme_override_font_sizes/font_size = 36
+text = "Finish Game"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/FinishGame"]
 show_behind_parent = true
@@ -2350,6 +2317,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -2617,14 +2585,53 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_4lacu")
 
-[node name="FinalBalloonsOld" type="Node2D" parent="CanvasLayer/FinalScores"]
-visible = false
+[node name="CollisionObjects" type="Node2D" parent="CanvasLayer/FinalScores"]
+unique_name_in_owner = true
 
-[node name="FinalBalloonRed" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="StaticBodyRed" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(290, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyRed"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="StaticBodyBlue" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(558, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyBlue"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="StaticBodyYellow" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(826, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyYellow"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="StaticBodyGreen" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(1094, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyGreen"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="StaticBodyPurple" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(1362, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyPurple"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="StaticBodyOrange" type="StaticBody2D" parent="CanvasLayer/FinalScores/CollisionObjects"]
+position = Vector2(1630, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/CollisionObjects/StaticBodyOrange"]
+shape = SubResource("SegmentShape2D_dcspi")
+
+[node name="FinalBalloons" type="Node2D" parent="CanvasLayer/FinalScores"]
+unique_name_in_owner = true
+
+[node name="FinalBalloonRed" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(290, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonRed"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonRed"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2644,18 +2651,18 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonRed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonRed"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonRed"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonRed"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("9_jv7cd")
 
-[node name="FinalBalloonBlue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="FinalBalloonBlue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(558, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonBlue"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonBlue"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2675,18 +2682,18 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonBlue"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonBlue"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonBlue"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonBlue"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("14_t6lb7")
 
-[node name="FinalBalloonYellow" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="FinalBalloonYellow" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(826, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonYellow"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonYellow"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2706,18 +2713,18 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonYellow"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonYellow"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonYellow"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonYellow"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("15_le3o5")
 
-[node name="FinalBalloonGreen" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="FinalBalloonGreen" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(1094, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonGreen"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonGreen"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2737,18 +2744,18 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonGreen"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonGreen"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonGreen"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonGreen"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("16_f0rqy")
 
-[node name="FinalBalloonPurple" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="FinalBalloonPurple" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(1362, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPurple"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonPurple"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2768,18 +2775,18 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPurple"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonPurple"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPurple"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonPurple"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("17_f0rqy")
 
-[node name="FinalBalloonOrange" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
+[node name="FinalBalloonOrange" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloons" groups=["final_score_balloons"]]
 position = Vector2(1630, 965)
 script = ExtResource("43_dcspi")
 
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonOrange"]
+[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonOrange"]
 z_index = 1
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 15
@@ -2799,74 +2806,12 @@ theme_override_font_sizes/normal_font_size = 150
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonOrange"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonOrange"]
 shape = SubResource("CapsuleShape2D_qvco6")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonOrange"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloons/FinalBalloonOrange"]
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("18_br3mg")
-
-[node name="FinalBalloonSky_Blue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
-position = Vector2(1630, 965)
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonSky_Blue"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonSky_Blue"]
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonSky_Blue"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("23_nkjlr")
-
-[node name="FinalBalloonPink" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
-position = Vector2(1630, 965)
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPink"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPink"]
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonPink"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("22_jra0m")
 
 [node name="FinalScoresLabel" type="RichTextLabel" parent="CanvasLayer/FinalScores"]
 layout_mode = 1
@@ -2879,6 +2824,32 @@ theme_override_font_sizes/normal_font_size = 100
 text = "Final Scores"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FinalScoresBtn" type="Button" parent="CanvasLayer/FinalScores"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -952.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 50
+theme_override_fonts/font = ExtResource("43_80kup")
+theme_override_font_sizes/font_size = 300
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dcspi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dcspi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dcspi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dcspi")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dcspi")
+text = "Ready?"
 
 [node name="WinnerBanner" type="Panel" parent="CanvasLayer/FinalScores"]
 unique_name_in_owner = true
@@ -2943,483 +2914,6 @@ texture_normal = ExtResource("42_qvco6")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/FinalScores"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_right = 150
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FinalScores/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="CollisionObjects" type="HBoxContainer" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StopPoints" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="StaticBodyRed" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 256
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyRed"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyBlue" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyBlue"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyYellow" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyYellow"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyGreen" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 8
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyGreen"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyPurple" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 16
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyPurple"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyOrange" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 32
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyOrange"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodySky_Blue" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 64
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodySky_Blue"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StaticBodyPink" type="StaticBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints"]
-collision_layer = 128
-collision_mask = 128
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects/StopPoints/StaticBodyPink"]
-shape = SubResource("SegmentShape2D_dcspi")
-
-[node name="StopPointBlue" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointYellow" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointGreen" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointPurple" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointOrange" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointSky_Blue" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="StopPointPink" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/CollisionObjects"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="Buffer" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-
-[node name="FinalBalloons" type="HBoxContainer" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="BalloonStartRed" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonRed" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartRed" groups=["final_score_balloons"]]
-collision_layer = 256
-collision_mask = 256
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartRed/FinalBalloonRed"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartRed/FinalBalloonRed"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartRed/FinalBalloonRed"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("9_jv7cd")
-region_enabled = true
-region_rect = Rect2(15, 0, 170, 200)
-
-[node name="BalloonStartBlue" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonBlue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartBlue" groups=["final_score_balloons"]]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartBlue/FinalBalloonBlue"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartBlue/FinalBalloonBlue"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartBlue/FinalBalloonBlue"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("14_t6lb7")
-region_enabled = true
-region_rect = Rect2(15, 0, 170, 200)
-
-[node name="BalloonStartYellow" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonYellow" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartYellow" groups=["final_score_balloons"]]
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartYellow/FinalBalloonYellow"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartYellow/FinalBalloonYellow"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartYellow/FinalBalloonYellow"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("15_le3o5")
-
-[node name="BalloonStartGreen" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonGreen" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartGreen" groups=["final_score_balloons"]]
-collision_layer = 8
-collision_mask = 8
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartGreen/FinalBalloonGreen"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartGreen/FinalBalloonGreen"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartGreen/FinalBalloonGreen"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("16_f0rqy")
-
-[node name="BalloonStartPurple" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonPurple" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPurple" groups=["final_score_balloons"]]
-collision_layer = 16
-collision_mask = 16
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPurple/FinalBalloonPurple"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPurple/FinalBalloonPurple"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPurple/FinalBalloonPurple"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("17_f0rqy")
-
-[node name="BalloonStartOrange" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonOrange" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartOrange" groups=["final_score_balloons"]]
-collision_layer = 32
-collision_mask = 32
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartOrange/FinalBalloonOrange"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartOrange/FinalBalloonOrange"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartOrange/FinalBalloonOrange"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("18_br3mg")
-
-[node name="BalloonStartSky_Blue" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonSky_Blue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartSky_Blue" groups=["final_score_balloons"]]
-collision_layer = 64
-collision_mask = 64
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartSky_Blue/FinalBalloonSky_Blue"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartSky_Blue/FinalBalloonSky_Blue"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartSky_Blue/FinalBalloonSky_Blue"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("23_nkjlr")
-
-[node name="BalloonStartPink" type="Control" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="FinalBalloonPink" type="CharacterBody2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPink" groups=["final_score_balloons"]]
-collision_layer = 128
-collision_mask = 128
-script = ExtResource("43_dcspi")
-
-[node name="Place" type="RichTextLabel" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPink/FinalBalloonPink"]
-z_index = 1
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_top = -101.0
-offset_right = 88.0
-offset_bottom = 107.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("43_80kup")
-theme_override_font_sizes/normal_font_size = 150
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPink/FinalBalloonPink"]
-position = Vector2(0, -82)
-scale = Vector2(0.25, 0.25)
-shape = SubResource("CapsuleShape2D_qvco6")
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartPink/FinalBalloonPink"]
-scale = Vector2(1.25, 1.25)
-texture = ExtResource("22_jra0m")
-
-[node name="FinalScoresBtn" type="Button" parent="CanvasLayer/FinalScores"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -952.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 50
-theme_override_fonts/font = ExtResource("43_80kup")
-theme_override_font_sizes/font_size = 300
-theme_override_styles/focus = SubResource("StyleBoxEmpty_dcspi")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dcspi")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_dcspi")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_dcspi")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_dcspi")
-text = "Ready?"
-
 [connection signal="value_changed" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider" to="CanvasLayer/MainScene/PercentBarMargin" method="_update_percent_guessed"]
 [connection signal="timeout" from="CanvasLayer/MainScene/PercentBarMargin/TextureRect/MarginContainer/PercentSlider/PGMTimer" to="CanvasLayer/MainScene/PercentBarMargin" method="hide_percent_guessed_moving"]
 [connection signal="pressed" from="CanvasLayer/MainScene/CheckAnswers" to="." method="_show_results"]
@@ -3432,25 +2926,22 @@ text = "Ready?"
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/CancelSettings" to="CanvasLayer/MainScene/QuestionMenu" method="_close_settings"]
 [connection signal="toggled" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PercentModeButton" to="." method="switch_percent_mode"]
 [connection signal="toggled" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/PotatoModeButton" to="." method="switch_potato_mode"]
-[connection signal="value_changed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/NumberTeams/NumTeamsSpinbox" to="." method="_change_num_teams"]
+[connection signal="value_changed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/MarginContainer/VBoxContainer/HBoxContainer/SpinBox" to="." method="_change_num_teams"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/SettingsMenu/LoadJSONQuestions" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadCache" to="." method="_load_json"]
 [connection signal="pressed" from="CanvasLayer/MainScene/QuestionMenu/LoadMenu/LoadButtons/LoadDemo" to="." method="_load_demo"]
 [connection signal="pressed" from="CanvasLayer/MainScene/OpenQuestionMenu" to="CanvasLayer/MainScene/QuestionMenu" method="_open_menu"]
 [connection signal="pressed" from="CanvasLayer/MainScene/Fullscreen" to="." method="fullscreen"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team1" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team1/Guess1/BalloonCircleRed" method="_update_circle_positions"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team2" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team2/Guess2/BalloonCircleBlue" method="_update_circle_positions"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team3" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team3/Guess3/BalloonCircleYellow" method="_update_circle_positions"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team4" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team4/Guess4/BalloonCircleGreen" method="_update_circle_positions"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team5" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team5/Guess5/BalloonCirclePurple" method="_update_circle_positions"]
-[connection signal="resized" from="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team6" to="CanvasLayer/ResultsScreen/TeamResults/BalloonResults/Team6/Guess6/BalloonCircleOrange" method="_update_circle_positions"]
 [connection signal="value_changed" from="CanvasLayer/ResultsScreen/ResultsBarPanel/ResultsPercentBar/MarginContainer/ResultsPercentSlider" to="CanvasLayer/ResultsScreen/ResultsBarMargin" method="_update_percent_guessed"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/BackToMain" to="CanvasLayer/ResultsScreen" method="_close_results"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestionBtn" to="." method="_next_question"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/FinishGame" to="." method="_go_to_final_scores"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_start"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/UploadCSV" to="CanvasLayer/MainMenu" method="_mouseover" binds= [1]]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="CanvasLayer/MainMenu" method="_mouseover" binds= [2]]
 [connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="." method="_start_demo"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Fullscreen" to="." method="fullscreen"]
-[connection signal="pressed" from="CanvasLayer/FinalScores/Fullscreen" to="." method="fullscreen"]
 [connection signal="pressed" from="CanvasLayer/FinalScores/FinalScoresBtn" to="CanvasLayer/FinalScores" method="show_final_results"]
+[connection signal="pressed" from="CanvasLayer/FinalScores/Fullscreen" to="." method="fullscreen"]

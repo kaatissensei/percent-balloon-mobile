@@ -6,9 +6,11 @@ var place : int = 0
 
 func _ready() -> void:
 	velocity.y = 0
+	set_physics_process(false)
 
 func start_moving():
 	velocity.y = -100
+	set_physics_process(true)
 
 #func get_input():
 #	#var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -25,3 +27,4 @@ func _physics_process(delta):
 		velocity.y = 0
 		if place == 1:
 			%FinalScores.show_banner()
+		#print(self.name, ": I somehow find %s and I collided" % collision.get_collider().name)

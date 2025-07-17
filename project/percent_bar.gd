@@ -13,6 +13,8 @@ func _update_percent_guessed(value : int, team_num : int = Main.currentTeam):
 	var x_pos : float = 14.7 * value
 	%PercentSlider.get_child(team_num).position.x = x_pos
 	
+	var text_color = Main.get_tint_color(Main.colors[team_num])
+	%PercentGuessedMoving.add_theme_color_override("default_color", text_color)
 	%PercentGuessedMoving.visible = true
 	%PercentGuessedMoving.position.x = x_pos - 45
 	%PercentGuessedMoving.text = str(value)

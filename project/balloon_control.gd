@@ -142,7 +142,7 @@ func restore_balloons(team_num : int):
 		balloon.popped[team_num] = false
 		balloon.visible = true
 	##DO THIS LATER---_\
-	for r_balloon in get_tree().get_nodes_in_group("result_balloons"):
+	for r_balloon in %BalloonResults.get_child(team_num).find_child("BalloonCircle*").get_children(): #get_tree().get_nodes_in_group("result_balloons"): 
 		r_balloon.visible = true
 	Main.restore_remaining(team_num)
 

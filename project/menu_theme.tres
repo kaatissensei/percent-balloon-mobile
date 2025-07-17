@@ -22,11 +22,11 @@ border_color = Color(0.427451, 0.427451, 0.427451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyb85"]
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 5
-border_width_top = 5
+border_width_left = 2
+border_width_top = 2
 border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.235294, 0.235294, 0.235294, 1)
+border_width_bottom = 5
+border_color = Color(0.462745, 0.462745, 0.462745, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -57,6 +57,6 @@ CheckButton/constants/align_to_largest_stylebox = 1
 LineEdit/colors/caret_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_placeholder_color = Color(0.401969, 0.401968, 0.401968, 0.6)
-LineEdit/font_sizes/font_size = 32
+LineEdit/font_sizes/font_size = 45
 LineEdit/styles/normal = SubResource("StyleBoxFlat_wyb85")
 Panel/styles/panel = SubResource("StyleBoxFlat_2krdf")

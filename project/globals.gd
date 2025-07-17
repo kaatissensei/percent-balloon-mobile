@@ -1,11 +1,13 @@
 extends Node
 
-const colors: Array[String] = ["Blue", "Green", "Orange", "Pink", "Purple", "Red", "Sky_Blue", "Yellow"] #Cyan
+var root: Node
+const colors: Array[String] = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Sky_Blue", "Pink"] #Cyan
 var randColor
 const top_bpr: int = 15 #balloons per row
 const rows: int = 7
 const num_balloons: int = 100
-const num_teams: int = 6
+var num_teams: int = 6
+var max_num_teams: int = 8 #Is this necessary?
 var balloons = [] #array of all balloons
 #var balloonsArray = [] #array of above
 var remainingBalloons: Array = []  #array with unpopped balloons. balloon removed when "popped"
@@ -48,21 +50,24 @@ func _ready() -> void:
 	clear_team_array(numToPop)
 	clear_team_array(falls)
 	
-	trigger_fall.resize(num_teams)
+	trigger_fall.resize(max_num_teams)
 	trigger_fall.fill(false)
 	
-	result_balloons.resize(num_teams)
+	result_balloons.resize(max_num_teams)
 
 func clear_team_array(array : Array, value = 0):
-	array.resize(num_teams)
+	array.resize(max_num_teams)
 	array.fill(value)
 
 func build_remaining_array():
-	for i in range(num_teams):
+	for i in range(max_num_teams):
 		remainingArray.append(remainingBalloons.duplicate(true))
 
 func build_remaining_result_balloons():
 	pass
+
+func set_num_teams(new_num_teams: int):
+	num_teams = new_num_teams
 
 func set_guess(val: int, team_num : int = currentTeam):
 	guesses[team_num] = val
@@ -132,6 +137,7 @@ func parse_csv_string():
 	#Remove headers
 	questions.pop_front()
 	answers.pop_front()
+	print(answers)
 	
 func fullscreen():
 	var mode := DisplayServer.window_get_mode()
@@ -175,6 +181,18 @@ func fall(team_num : int):
 func get_falls(team_num : int):
 	return falls[team_num]
 
+func get_tint_color(color):
+	match color:
+			"Yellow":
+				return "Gold"
+			"Blue":
+				return "Dodger_Blue"
+			"Orange":
+				return "Dark_Orange"
+			"Pink":
+				return "Hot_Pink"
+			_:
+				return color
 ##Saving
 func save():
 	var save_dict = {
@@ -184,7 +202,7 @@ func save():
 	return save_dict
 
 func save_JSON():
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var save_file = FileAccess.open("user://percentballoon.save", FileAccess.WRITE)
 	# Call the node's save function.
 	var node_data = call("save")
 
@@ -195,12 +213,12 @@ func save_JSON():
 	save_file.store_line(json_string)
 
 func load_JSON():
-	if not FileAccess.file_exists("user://savegame.save"):
+	if not FileAccess.file_exists("user://percentballoon.save"):
 		return # Error! We don't have a save to load.
 	
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var save_file = FileAccess.open("user://percentballoon.save", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_string = save_file.get_line()
 
@@ -220,16 +238,6 @@ func load_JSON():
 		answers.assign(node_data["answers"])
 		
 func load_demo_csv() :
-	demo_csv = "Question,Answer
-What percent of students like science?,66
-What percent play games?,81
-What percent play the piano?,25
-What percent said their favorite fruit is apples?,18
-What percent said their favorite sport was soccer?,27
-What percent watch TV every day?,61
-What percent study English every day?,4
-What percent have only one sibling?,48
-What percent eat breakfast every day?,80
-What percent never read books?,18"
-	csvFile = demo_csv
+	questions = ["What percent of students like science?", "What percent play games?", "What percent play the piano?", "What percent said their favorite fruit is apples?", "What percent said their favorite sport was soccer?", "What percent watch TV every day?", "What percent study English every day?", "What percent have only one sibling?", "What percent eat breakfast every day?", "What percent never read books?"]
+	answers = [66, 81, 25, 18, 27, 61, 4, 48, 80, 18]
 	#parse_csv_string()

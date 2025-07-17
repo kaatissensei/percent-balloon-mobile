@@ -17,14 +17,16 @@ func _ready() -> void:
 	%Students.self_modulate = Color.WHITE
 	%SurprisedFaces.visible = false
 	%Snorkels.visible = false
+	Main.root = self
 
 func _start_demo():
 	Main.load_demo_csv()
-	Main.parse_csv_string()
+	#Main.parse_csv_string()
 	load_question_text()
 	%MainMenu.visible = false
 	%ResultsScreen.visible = false
 	Main.reset_rrb()
+	_change_num_teams(Main.num_teams)
 
 func _change_team(teamNum: int):
 	var currentTeam = int(teamNum)
@@ -35,36 +37,29 @@ func _change_team(teamNum: int):
 	load_bg(currentTeam)
 	
 	#updateBalloons()
-	match (currentTeam):
-		0:
-			basketColor = "Red"
-		1:
-			basketColor = "Blue"
-		2:
-			basketColor = "Yellow"
-		3:
-			basketColor = "Green"
-		4:
-			basketColor = "Purple"
-		5:
-			basketColor = "Orange"
-		6:
-			basketColor = "Cyan"
-		7:
-			basketColor = "Pink"
-		_:
-			basketColor = "Red"
+	basketColor = Main.colors[currentTeam]
+	#match (currentTeam):
+		#0:
+			#basketColor = "Red"
+		#1:
+			#basketColor = "Blue"
+		#2:
+			#basketColor = "Yellow"
+		#3:
+			#basketColor = "Green"
+		#4:
+			#basketColor = "Purple"
+		#5:
+			#basketColor = "Orange"
+		#6:
+			#basketColor = "Sky_Blue"
+		#7:
+			#basketColor = "Pink"
+		#_:
+			#basketColor = "Red"
 		
 	%Basket.texture = load("res://images/assets/basket%s.png" % basketColor)
-	match basketColor:
-		"Yellow":
-			tintColor = "Gold"
-		"Blue":
-			tintColor = "Dodger_Blue"
-		"Orange":
-			tintColor = "Dark_Orange"
-		_:
-			tintColor = basketColor
+	tintColor = Main.get_tint_color(basketColor)
 	
 		#Change percent color
 	%PercentGuessed.add_theme_color_override("default_color", Color(tintColor))
@@ -81,12 +76,14 @@ func _change_team(teamNum: int):
 	%RemainingBalloon.texture = load("res://images/balloons/balloon%sSm.png" % basketColor)
 	%RemainingBalloonNum.text = str(Main.remainingArray[currentTeam].size())
 	
+	%PercentGuessedMoving.add_theme_color_override("default_color", tintColor)
+	
 	#Trigger fall animation if the team is out of balloons
 	if (Main.trigger_fall[currentTeam]):
 		fall_animation()
 
 func reset_guesses():
-	for i in range(Main.num_teams):
+	for i in range(Main.max_num_teams):
 		#_change_team(i)
 		%ResultsBarMargin._update_percent_guessed(0, i)
 		update_markers()
@@ -108,6 +105,10 @@ func _next_question() -> void:
 	Main.question_num += 1
 	load_question_text()
 	reset_guesses()
+	
+	#Reset results balloons if fall
+	
+	
 
 func load_question_text():
 	var q_num : int = Main.question_num
@@ -166,6 +167,10 @@ func _set_questions():
 	reset()
 	Main.save_JSON()
 	%QuestionMenu._close_menu()
+	
+	##Move circles AFTER positions have definitely been changed
+	#for circle in get_tree().get_nodes_in_group("balloon_circles"):
+		#circle.move_circle()
 
 func load_bg(team_num : int):
 	var team_falls : int = Main.get_falls(team_num)
@@ -192,6 +197,9 @@ func load_bg(team_num : int):
 				%Students.self_modulate = Color.BLACK
 				%Ties.self_modulate = Color.BLACK
 				%BalloonControl.glow_in_the_dark(true)
+
+func fall_resets():
+	pass
 
 func fall_animation():
 	var current_team = Main.currentTeam
@@ -225,7 +233,6 @@ func _load_json() -> void:
 
 func _load_demo() -> void:
 	Main.load_demo_csv()
-	Main.parse_csv_string()
 	%QuestionMenu.load_question_menu()
 	load_question_text()
 	%LoadMenu.visible = false
@@ -238,3 +245,41 @@ func _go_to_final_scores() -> void:
 func fullscreen():
 	Main.fullscreen()
 	
+
+func _change_num_teams(value: int) -> void:
+	Main.set_num_teams(value)
+	update_balloon_bar()
+	%NumTeamsSpinbox.value = value
+	%ResultsScreen.change_num_team_results()
+
+func update_balloon_bar():
+	var num_teams = Main.num_teams
+	for balloon in get_tree().get_nodes_in_group("slider_balloons"):  #Careful, the balloons are in backwards order
+		var team_num : int = int(balloon.name.right(1))
+		if team_num <= num_teams:
+			%TeamSlider.get_child(0).get_child(8 - team_num).visible = true
+			%PercentSlider.get_child(team_num-1).visible = true
+		else:
+			%TeamSlider.get_child(0).get_child(8 - team_num).visible = false
+			%PercentSlider.get_child(team_num-1).visible = false
+
+	%TeamSlider.visible = true
+	#Change slider height
+	if num_teams == 8:
+		%TeamSlider.size.y = 620
+		%TeamSlider.position.y = 160
+	elif num_teams == 7:
+		%TeamSlider.size.y = 530
+		%TeamSlider.position.y =250
+	elif num_teams == 1:
+		%TeamSlider.visible = false
+	else:
+		%TeamSlider.size.y = 440
+		%TeamSlider.position.y = 340
+	#Change number of ticks
+	%TeamSlider.tick_count = num_teams
+	%TeamSlider.max_value = num_teams - 1
+
+
+func _update_circle_positions() -> void:
+	pass # Replace with function body.

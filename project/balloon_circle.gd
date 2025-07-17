@@ -54,6 +54,7 @@ func balloon_gen(team_color : String = "Red"):
 		var new_pos = gen_balloon_circle()
 		#print(new_pos)
 		newBalloon.position = new_pos#gen_random_pos()
+		newBalloon.pos_offset = new_pos - origin
 		#print(newBalloon.position)
 		#Set balloon color
 		balloon_color = team_color
@@ -67,3 +68,24 @@ func balloon_gen(team_color : String = "Red"):
 		Main.result_balloons[team_num-1].append(newBalloon)
 		add_child(newBalloon)
 		#newBalloon.position = Vector2(300,300)#self.position#gen_balloon_circle()#gen_random_pos()
+
+func update_origin():
+	self.position.x = get_parent().size.x / 2
+	self.position.y = get_parent().size.y / 2
+
+func get_origin():
+	return self.global_position
+
+
+
+func move_circle():
+	update_origin()
+	for balloon in get_children():
+		balloon.set_origin(self.global_position)
+
+func print_test():
+	print("OK")
+
+
+func _update_circle_positions() -> void:
+	move_circle()
