@@ -2,7 +2,6 @@ extends TextureRect
 
 signal num_teams_changed
 signal start_demo
-signal test_signal
 
 var demo : bool = false
 
