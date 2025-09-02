@@ -95,9 +95,16 @@ func reset_guesses():
 	
 
 func _show_results() -> void:
-	%ResultsScreen.open()
 	if Main.question_num >= Main.num_questions:
 		%NextQuestionBtn.visible = false
+	
+	##WIP Reset teams' balloons that have all been popped
+	for i in range(Main.num_teams):
+		if Main.trigger_fall[i]:
+			Main.trigger_fall[i] = false
+			restore_balloons(i)
+	
+	%ResultsScreen.open()
 
 func _next_question() -> void:
 	%CheckAnswers.disabled = false
@@ -214,16 +221,18 @@ func fall_animation():
 	await get_tree().create_timer(0.7).timeout
 	
 	%Speed.visible = true
-	Main.fall(current_team)
 	#Do while speed lines are showing
-	_change_team(current_team)
-	%Students.position.y = 809
-	%BalloonControl.restore_balloons(current_team)
-	%RemainingBalloonNum.text = str(Main.remainingArray[current_team].size())
+	restore_balloons(current_team)
 	await get_tree().create_timer(0.5).timeout
 	#Hide speed lines
 	%Speed.visible = false
 
+func restore_balloons(team_num : int):
+	Main.fall(team_num)
+	_change_team(team_num)
+	%Students.position.y = 809
+	%BalloonControl.restore_balloons(team_num)
+	%RemainingBalloonNum.text = str(Main.remainingArray[team_num].size())
 
 func _load_json() -> void:
 	Main.load_JSON()
@@ -247,6 +256,7 @@ func fullscreen():
 	
 
 func _change_num_teams(value: int) -> void:
+	print("Now %d teams" % value)
 	Main.set_num_teams(value)
 	update_balloon_bar()
 	%NumTeamsSpinbox.value = value
@@ -282,4 +292,12 @@ func update_balloon_bar():
 
 
 func _update_circle_positions() -> void:
+	pass # Replace with function body.
+
+
+func _mouseover(extra_arg_0: int) -> void:
+	pass # Replace with function body.
+
+
+func _on_main_menu_num_teams_changed(extra_arg_0: int) -> void:
 	pass # Replace with function body.

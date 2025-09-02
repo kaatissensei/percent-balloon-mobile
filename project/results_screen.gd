@@ -32,8 +32,10 @@ func open():
 		%BalloonResults.columns = num_teams
 		%ResultsFiller.visible = true
 	
+	%CheckAnswers.visible = true
+	
 func load_results():
-	%CheckAnswers.disabled = true
+	%CheckAnswers.visible = false
 	await animate_bar()
 	%BalloonControl._check_answers()
 	show_popped()
@@ -79,7 +81,7 @@ func show_popped(): #Should change name
 
 
 func _close_results() -> void:
-	%CheckAnswers.disabled = false
+	#%CheckAnswers.disabled = false
 	visible = false
 
 ##WIP WHY does it not change it until AFTER???

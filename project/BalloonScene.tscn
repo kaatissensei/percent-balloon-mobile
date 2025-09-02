@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://b5juwfw3grufw"]
+[gd_scene load_steps=89 format=3 uid="uid://b5juwfw3grufw"]
 
 [ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
 [ext_resource type="Texture2D" uid="uid://c8off70hx3i4u" path="res://images/assets/BG_Sky.tres" id="2_gel8g"]
@@ -51,6 +51,7 @@
 [ext_resource type="Script" uid="uid://bchq0tgnvlh4n" path="res://final_balloon.gd" id="43_dcspi"]
 [ext_resource type="Texture2D" uid="uid://bi35y8a71kyq8" path="res://images/ui/grabber/pb_grabber_sky_blue.png" id="45_u2xip"]
 [ext_resource type="Texture2D" uid="uid://bmcjywgwe6t53" path="res://images/ui/grabber/pb_grabber_pink.png" id="46_4is08"]
+[ext_resource type="FontFile" uid="uid://cpsapjw826iw8" path="res://images/assets/DokiDokiFantasia.otf" id="47_4is08"]
 
 [sub_resource type="Environment" id="Environment_303ga"]
 background_mode = 3
@@ -225,6 +226,11 @@ colors = PackedColorArray(0, 0.341176, 1, 1, 0, 0.756863, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cqpuy"]
 gradient = SubResource("Gradient_br3mg")
 fill_to = Vector2(0, 1)
+
+[sub_resource type="Theme" id="Theme_t3fpp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vm7ju"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0)
 
 [sub_resource type="Gradient" id="Gradient_6q50i"]
 offsets = PackedFloat32Array(0, 0.455556, 1)
@@ -2296,11 +2302,15 @@ color = Color(0, 0, 0, 1)
 
 [node name="FinishGame" type="Button" parent="CanvasLayer/ResultsScreen"]
 z_index = 50
-layout_mode = 0
-offset_left = 1744.0
-offset_top = 1000.0
-offset_right = 1902.0
-offset_bottom = 1068.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -85.0
+offset_right = 174.0
+offset_bottom = -17.0
+grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("12_r7h5b")
 theme_override_font_sizes/font_size = 24
@@ -2324,17 +2334,45 @@ color = Color(0, 0, 0, 1)
 
 [node name="CheckAnswers" type="Button" parent="CanvasLayer/ResultsScreen"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 17.0
-offset_top = 548.0
-offset_right = 167.0
-offset_bottom = 656.0
+z_index = 31
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -284.0
+offset_bottom = 404.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("12_r7h5b")
-theme_override_font_sizes/font_size = 36
-text = "Check!"
+theme = SubResource("Theme_t3fpp")
+theme_override_fonts/font = ExtResource("47_4is08")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_vm7ju")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vm7ju")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_vm7ju")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vm7ju")
+
+[node name="CheckAnswersText" type="RichTextLabel" parent="CanvasLayer/ResultsScreen/CheckAnswers"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[center]Check![/center]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/ResultsScreen/CheckAnswers"]
+visible = false
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -2594,6 +2632,231 @@ grow_horizontal = 0
 texture_normal = ExtResource("42_qvco6")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="ChooseNumPlayers" type="TextureRect" parent="CanvasLayer/MainMenu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gel8g")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 8.0
+offset_bottom = 280.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 50
+theme_override_fonts/normal_font = ExtResource("43_80kup")
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[center]How many teams?[/center]"
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu/ChooseNumPlayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="1" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("9_jv7cd")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_t6lb7")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_le3o5")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="4" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_f0rqy")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="5" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("17_f0rqy")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="6" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("18_br3mg")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="7" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("23_nkjlr")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="8" type="TextureButton" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("22_jra0m")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("21_br3mg")
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/normal_font_size = 200
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FinalScores" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -2876,7 +3139,8 @@ anchor_right = 1.0
 offset_bottom = 196.0
 grow_horizontal = 2
 theme_override_constants/outline_size = 20
-theme_override_font_sizes/normal_font_size = 100
+theme_override_fonts/normal_font = ExtResource("43_80kup")
+theme_override_font_sizes/normal_font_size = 125
 text = "Final Scores"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -3450,8 +3714,19 @@ text = "Ready?"
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/NextQuestionBtn" to="." method="_next_question"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/FinishGame" to="." method="_go_to_final_scores"]
 [connection signal="pressed" from="CanvasLayer/ResultsScreen/CheckAnswers" to="CanvasLayer/ResultsScreen" method="load_results"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_start"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="." method="_start_demo"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_mouseover" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartGame" to="CanvasLayer/MainMenu" method="_open_num_players"]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/UploadCSV" to="CanvasLayer/MainMenu" method="_mouseover" binds= [1]]
+[connection signal="mouse_entered" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="CanvasLayer/MainMenu" method="_mouseover" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/StartDemo" to="CanvasLayer/MainMenu" method="_open_num_players" binds= [true]]
 [connection signal="pressed" from="CanvasLayer/MainMenu/Fullscreen" to="." method="fullscreen"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/1" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/2" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/3" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [3]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/4" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [4]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/5" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [5]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/6" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [6]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/7" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [7]]
+[connection signal="pressed" from="CanvasLayer/MainMenu/ChooseNumPlayers/MarginContainer/GridContainer/8" to="CanvasLayer/MainMenu" method="_set_initial_num_teams" binds= [8]]
 [connection signal="pressed" from="CanvasLayer/FinalScores/Fullscreen" to="." method="fullscreen"]
 [connection signal="pressed" from="CanvasLayer/FinalScores/FinalScoresBtn" to="CanvasLayer/FinalScores" method="show_final_results"]

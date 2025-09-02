@@ -38,6 +38,7 @@ var csvArray = []
 var trigger_restore : bool = false
 var trigger_fall : Array[bool]
 var demo_csv
+var is_demo : bool = false
 
 @onready var redBalloon = preload("res://images/balloons/balloonRedSm.png")
 
@@ -241,3 +242,6 @@ func load_demo_csv() :
 	questions = ["What percent of students like science?", "What percent play games?", "What percent play the piano?", "What percent said their favorite fruit is apples?", "What percent said their favorite sport was soccer?", "What percent watch TV every day?", "What percent study English every day?", "What percent have only one sibling?", "What percent eat breakfast every day?", "What percent never read books?"]
 	answers = [66, 81, 25, 18, 27, 61, 4, 48, 80, 18]
 	#parse_csv_string()
+
+func _test():
+	print("Test")
