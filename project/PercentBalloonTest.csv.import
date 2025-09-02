@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b2y7vqe2qsgky"
+
+[deps]
+
+files=["res://PercentBalloonTest.Answer.translation"]
+
+source_file="res://PercentBalloonTest.csv"
+dest_files=["res://PercentBalloonTest.Answer.translation"]
+
+[params]
+
+compress=true
+delimiter=0
