@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6xfhg77i73li"]
-
-[ext_resource type="Script" uid="uid://7rou057knc6b" path="res://balloon.gd" id="1_3aso6"]
-[ext_resource type="Texture2D" uid="uid://bibwcbuydpkqt" path="res://images/balloons/balloonWhiteSm.png" id="1_7b2e7"]
-
-[node name="Balloon" type="Sprite2D"]
-texture = ExtResource("1_7b2e7")
-script = ExtResource("1_3aso6")
