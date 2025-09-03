@@ -29,6 +29,23 @@ func _ready() -> void:
 	popped.fill(false)
 	await get_tree().create_timer(1).timeout
 	#set_physics_process(false)
+	
+
+#func _physics_process(_delta: float) -> void:
+	#var time = Time.get_unix_time_from_system()
+	#
+	##rotate
+	##self.scale.x = sin(time * rotate_speed)
+	#
+	##bob up and down
+	#y_pos 	= ((1+sin(time * bob_speed)) / 2) * bob_height
+	#global_position.y =  start_position.y - y_pos
+	###TRY ADDING PARENT POSITION. IF NOT, MAKE LOCAL BALLOON TSCN
+	###WHY IS PARENT POSITION SO FD ON THE RESULTS??
+	#x_pos = ((1+cos(time * bob_speed / 2)) / 2) * bob_width
+	#global_position.x =  start_position.x - x_pos
+	
+	#rotation = ((sin(time * 0.5)) / 2) * rnd
 
 func set_default_color(color: String):
 	defaultColor = color

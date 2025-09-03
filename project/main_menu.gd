@@ -51,7 +51,3 @@ func _mouseover(btnID : int) -> void:
 	
 	hovered_btn.get_child(0).visible = true
 	hovered_btn.get_child(1).visible = false
-
-
-func _on__pressed(extra_arg_0: int) -> void:
-	pass # Replace with function body.

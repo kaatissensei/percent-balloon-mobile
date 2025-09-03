@@ -289,15 +289,3 @@ func update_balloon_bar():
 	#Change number of ticks
 	%TeamSlider.tick_count = num_teams
 	%TeamSlider.max_value = num_teams - 1
-
-
-func _update_circle_positions() -> void:
-	pass # Replace with function body.
-
-
-func _mouseover(extra_arg_0: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_main_menu_num_teams_changed(extra_arg_0: int) -> void:
-	pass # Replace with function body.

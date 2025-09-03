@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://b5juwfw3grufw"]
+[gd_scene load_steps=90 format=3 uid="uid://b5juwfw3grufw"]
 
 [ext_resource type="Script" uid="uid://cwieun0onqbk0" path="res://balloon_scene.gd" id="1_qfsef"]
 [ext_resource type="Texture2D" uid="uid://c8off70hx3i4u" path="res://images/assets/BG_Sky.tres" id="2_gel8g"]
@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://bptc4mu6y1n2g" path="res://percent_bar.gd" id="8_prrwr"]
 [ext_resource type="Texture2D" uid="uid://dnhciy8yeghlv" path="res://images/ui/grabber/pb_grabber_green.png" id="9_6aymu"]
 [ext_resource type="Texture2D" uid="uid://co4whnherpunb" path="res://images/ui/triangles/pb_triangle_yellow.png" id="9_ax8sm"]
-[ext_resource type="Texture2D" uid="uid://bk1b8lj8c3ejx" path="res://images/balloons/balloonRedSm.png" id="9_jv7cd"]
+[ext_resource type="Texture2D" uid="uid://bbvmuvhkfxlu3" path="res://images/balloons/balloonRedSm.png" id="9_jv7cd"]
 [ext_resource type="Texture2D" uid="uid://dv8fxftup3tq0" path="res://images/ui/triangles/pb_triangle_green.png" id="10_5f234"]
 [ext_resource type="Texture2D" uid="uid://cwedofgcsj44l" path="res://images/ui/PercentBalloonBar.png" id="10_eknsk"]
 [ext_resource type="Texture2D" uid="uid://ojjwgl2fwj7t" path="res://images/ui/grabber/pb_grabber_orange.png" id="10_r7h5b"]
@@ -245,6 +245,8 @@ texture = SubResource("GradientTexture2D_uap65")
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qvco6"]
 radius = 88.0
 height = 224.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u2xip"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcspi"]
 bg_color = Color(0, 0, 0.509804, 0.443137)
@@ -2913,7 +2915,7 @@ shape = SubResource("CapsuleShape2D_qvco6")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld/FinalBalloonRed"]
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("9_jv7cd")
+texture = SubResource("CompressedTexture2D_u2xip")
 
 [node name="FinalBalloonBlue" type="CharacterBody2D" parent="CanvasLayer/FinalScores/FinalBalloonsOld" groups=["final_score_balloons"]]
 position = Vector2(558, 965)
@@ -3379,7 +3381,7 @@ shape = SubResource("CapsuleShape2D_qvco6")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/FinalScores/MarginContainer/VBoxContainer/FinalBalloons/BalloonStartRed/FinalBalloonRed"]
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("9_jv7cd")
+texture = SubResource("CompressedTexture2D_u2xip")
 region_enabled = true
 region_rect = Rect2(15, 0, 170, 200)
 
