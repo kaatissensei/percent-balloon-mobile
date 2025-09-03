@@ -70,7 +70,7 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 	#var string_data: String = base64_data.get_string_from_utf8()
 	#Hide Main Menu
 	if %MainMenu.visible:
-		%MainMenu._start()
+		%ChooseNumPlayers.visible = true
 	if %LoadMenu.visible:
 		%LoadMenu.visible = false
 	
@@ -81,7 +81,9 @@ func _on_file_loaded(_file_name: String, _type: String, base64_data: String) -> 
 		Main.csvFile = FileAccess.open("user://PB_Questions.csv", FileAccess.READ)
 		Main.parse_csv()
 		load_question_menu()
-		%DEBUG.text = Main.csvArray
+		
+		%QuestionText.text = "Q1: " + Main.questions[0]
+		#%DEBUG.text = Main.csvArray
 	else:
 		%DEBUG.text = "Can't find file."
 
