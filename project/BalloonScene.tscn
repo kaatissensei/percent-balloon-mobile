@@ -2364,7 +2364,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("21_br3mg")
-theme_override_font_sizes/normal_font_size = 200
+theme_override_font_sizes/normal_font_size = 300
 bbcode_enabled = true
 text = "[center]Check![/center]"
 fit_content = true
@@ -2389,6 +2389,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
